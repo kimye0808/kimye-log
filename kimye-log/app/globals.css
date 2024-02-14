@@ -14,6 +14,7 @@
   --bg-oxford-blue: rgb(217, 225, 246);
   --bg-frost-white: RGB(249, 255, 253);
   --bg-emerald-green: hsl(151.76, 100%, 6.67%);
+  --bg-delicate-beige: hsla(60, 25%, 95%, 1);
 
   /** Text colors */
   --text-white: hsla(0, 0%, 100%, 1);
@@ -26,11 +27,17 @@
   --text-deep-forest-green: hsla(155, 100%, 4%, 1);
   --text-light-green: rgb(242, 255, 251);
   --text-mint-green: rgb(194, 255, 235);
+  --text-emerald-green: hsl(151.76, 100%, 6.67%);
 
   /** Gradient colors */
-  --gradient-1: linear-gradient(90deg, #0ea5ea, #0bd1d1 51%);
-  --gradient-2: linear-gradient(90deg, #0ea5ea, #0bd1d1 51%, #0ea5ea);
+  --gradient-1: linear-gradient(to right, rgba(26, 81, 27, 1), #000000);
+  --gradient-2: linear-gradient(
+    to right,
+    rgba(39, 98, 40, 0.92),
+    rgba(0, 0, 0, 0.88)
+  );
   --gradient-3: linear-gradient(0deg, #000d1a, transparent);
+  --gradient-4: linear-gradient(to right, rgba(255, 215, 0, 1), #000000);
 
   /** Border colors */
   --border-wild-blue-yonder: hsla(216, 33%, 68%, 1);
@@ -234,7 +241,7 @@ body.nav-active {
 
 .headline-1 {
   font-size: var(--fontSize-1);
-  color: var(--text-alice-blue);
+  color: var(--text-emerald-green);
   font-weight: var(--weight-extraBold);
 }
 
@@ -252,9 +259,10 @@ body.nav-active {
 }
 
 .headline .span {
-  background-image: var(--gradient-1);
+  /* background-image: var(--gradient-4); */
   display: inline-block;
-  -webkit-text-fill-color: transparent;
+  /* -webkit-text-fill-color: transparent; */
+  /* -webkit-background-clip: text; */
 }
 
 .btn {

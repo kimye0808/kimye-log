@@ -1,0 +1,21 @@
+.hero {
+  padding-block-start: calc(var(--section-padding) + 160px);
+}
+.hero .container {
+  display: grid;
+  gap: 50px;
+}
+.hero-subtitle {
+  font-size: var(--fontSize-2);
+  font-weight: var(--weight-bold);
+}
+.hero .section-title {
+  margin-block: 20px;
+}
+.hero .hero-text {
+  margin-block-end: 40px;
+}
+
+.hero-banner {
+  position: relative;
+}
