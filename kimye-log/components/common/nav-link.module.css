@@ -1,0 +1,7 @@
+.active {
+  background: var(--text-mint-green);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
