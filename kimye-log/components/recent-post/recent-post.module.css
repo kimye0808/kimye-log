@@ -1,0 +1,10 @@
+.recent-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.btn {
+  margin-inline: auto;
+  margin-block-start: 30px;
+}

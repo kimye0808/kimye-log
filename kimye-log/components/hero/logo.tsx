@@ -1,7 +1,7 @@
 import Image from "next/image";
 import classes from "./logo.module.css";
 
-import heroImg from "@/assets/hero.svg";
+import heroImg from "@/assets/hero.png";
 import { DiCss3 } from "react-icons/di";
 import { DiHtml5 } from "react-icons/di";
 import { DiJsBadge } from "react-icons/di";

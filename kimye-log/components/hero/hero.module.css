@@ -1,5 +1,8 @@
 .hero {
-  padding-block-start: calc(var(--section-padding) + 160px);
+  padding-block-start: calc(var(--section-padding) + 50px);
+  background-color: var(--bg-frost-white);
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
 }
 .hero .container {
   display: grid;
