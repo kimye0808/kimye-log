@@ -37,6 +37,13 @@ export default function NavBar() {
     },
     navbarVisible
   );
+
+  /**
+   * 링크를 클릭해서 이동하면 navbar가 닫히게 한다
+   */
+  function handleLinkClick() {
+    toggleVisible();
+  }
   /**
    * return
    **/
@@ -55,14 +62,23 @@ export default function NavBar() {
           </button>
         </div>
         <ul className={classes["navbar-list"]}>
-          <li className={`${classes["navbar-link"]} hover-3`}>
+          <li
+            className={`${classes["navbar-link"]} hover-3`}
+            onClick={handleLinkClick}
+          >
             <NavLink href="/">Home</NavLink>
           </li>
-          <li className={`${classes["navbar-link"]} hover-3`}>
-            <NavLink href="/post">Post</NavLink>
+          <li
+            className={`${classes["navbar-link"]} hover-3`}
+            onClick={handleLinkClick}
+          >
+            <NavLink href="posts">Posts</NavLink>
           </li>
-          <li className={`${classes["navbar-link"]} hover-3`}>
-            <NavLink href="/about">About</NavLink>
+          <li
+            className={`${classes["navbar-link"]} hover-3`}
+            onClick={handleLinkClick}
+          >
+            <NavLink href="about">About</NavLink>
           </li>
         </ul>
         <p className={classes["copyright-text"]}>
