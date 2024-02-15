@@ -1,6 +1,5 @@
 import classes from "./tags.module.css";
-import fur from "@/assets/fur.svg";
-import Image from "next/image";
+import Tag from "./tag";
 
 export default function Tags() {
   return (
@@ -8,14 +7,20 @@ export default function Tags() {
       <section className={classes.tags}>
         <div className={`${classes} container`}>
           <h2 className={`${classes} headline headline-2 section-title`}>
-            <span className={`${classes} span`}>Popular Tags</span>
+            <span className={`${classes} span`}>Tags</span>
           </h2>
-          <ul className={`${classes["grid-list"]} gird-list`}>
+          <ul className={`${classes["grid-list"]} grid-list`}>
             <li>
-              <button className={`${classes["tag-btn"]} card`}>
-                <Image src={fur} alt="fur" />
-                <p>sports </p>
-              </button>
+              <Tag tagName={"fur"} />
+            </li>
+            <li>
+              <Tag tagName={"fur"} />
+            </li>
+            <li>
+              <Tag tagName={"fur"} />
+            </li>
+            <li>
+              <Tag tagName={"fur"} />
             </li>
           </ul>
         </div>

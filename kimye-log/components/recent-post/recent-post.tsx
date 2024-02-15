@@ -1,5 +1,5 @@
 import classes from "./recent-post.module.css";
-import Card from "./card";
+import Card from "../card/card";
 import smile from "@/assets/card/smile.jpg";
 import teamwork from "@/assets/card/teamwork.jpg";
 import soccer from "@/assets/card/soccer.jpg";

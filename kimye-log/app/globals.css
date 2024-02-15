@@ -28,6 +28,7 @@
   --text-light-green: rgb(242, 255, 251);
   --text-mint-green: rgb(194, 255, 235);
   --text-emerald-green: hsl(151.76, 100%, 6.67%);
+  --text-gray: #c7c8cc;
   /** Gradient colors */
   --gradient-1: linear-gradient(to right, rgba(26, 81, 27, 1), #000000);
   --gradient-2: linear-gradient(
@@ -43,6 +44,7 @@
   --border-prussian-blue: hsla(216, 33%, 20%, 1);
   --border-white: hsl(0, 0%, 100%);
   --border-white-alpha-15: hsla(0, 0%, 100%, 0.15);
+  --border-gray: #c7c8cc;
 
   /** Default colors */
   --white: hsl(0, 0%, 100%, 1);
@@ -64,6 +66,7 @@
   --fontSize-6: 1.4rem;
   --fontSize-7: 1.2rem;
   --fontSize-8: 1.3rem;
+  --fontSize-9: 1rem;
 
   /** Font weight */
   --weight-medium: 500;
@@ -89,6 +92,7 @@
 
   --radius-6: 6px;
   --radius-8: 8px;
+  --radius-12: 12px;
   --radius-16: 16px;
   --radius-48: 48px;
   --radius-circle: 50%;
@@ -184,6 +188,7 @@ body.nav-active {
 
 ::-webkit-scrollbar {
   width: 5px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -191,8 +196,12 @@ body.nav-active {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--bg-prussian-blue);
-  border-radius: var(--radius-pill);
+  background-color: #50623a;
+  background-image: linear-gradient(
+    to right,
+    transparent 50%,
+    rgba(255, 255, 255, 0.5) 50%
+  );
 }
 
 /*-----------------------------------*\
