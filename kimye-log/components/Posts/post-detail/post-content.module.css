@@ -1,0 +1,14 @@
+.section {
+  padding-block: calc(var(--section-padding) - 50px);
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+.code span {
+  width: 100%;
+  display: inline;
+  font-size: 85%;
+}

@@ -1,10 +1,17 @@
 import styles from "./page.module.css";
+import Hero from "@/components/hero/hero";
+import RecentPost from "@/components/recent-post/recent-post";
+import Tags from "@/components/tags/tags";
+
 export default function Home() {
   return (
     <>
-      {/* <header><div className="container"></div></header> */}
       <main>
-        {/* <article><section className={styles.hero}></section></article> */}
+        <article>
+          <Hero />
+          <RecentPost />
+          <Tags />
+        </article>
       </main>
     </>
   );

@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   padding-block: 24px;
-  background-color: var(--bg-oxford-blue-2);
+  background-color: var(--bg-frost-white);
   z-index: 4;
 }
 
@@ -33,13 +33,4 @@
   height: 2rem;
   object-fit: contain;
   filter: drop-shadow(var(--shadow3));
-}
-
-@keyframes slideIn {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(0);
-  }
 }

@@ -1,0 +1,9 @@
+.section {
+  padding-block: 10px;
+}
+
+.posts-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
