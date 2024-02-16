@@ -30,9 +30,7 @@ export default function CardDetail({
       <div className={`${classes["recent-card"]} card`}>
         <summary>
           <h3 className={`${classes} headline headline-4`}>
-            <Link href="/" className={`${classes["card-title"]} hover-2`}>
-              {title}
-            </Link>
+            <p className={`${classes["card-title"]} hover-2`}>{title}</p>
           </h3>
         </summary>
         <p>{summary}</p>
@@ -60,13 +58,9 @@ export default function CardDetail({
             <div className={classes["card-tag"]}>
               {tags?.map((tag) => {
                 return (
-                  <Link
-                    key={tag}
-                    href="/"
-                    className={`${classes} span hover-2`}
-                  >
-                    {tag}
-                  </Link>
+                  <p key={tag} className={`${classes} span hover-2`}>
+                    {tag}&nbsp;
+                  </p>
                 );
               })}
             </div>
