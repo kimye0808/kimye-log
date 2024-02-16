@@ -18,7 +18,7 @@ export default function NavLink({ href, children }: NavLinkProps) {
   if (pathLength === 1 && pathAfterSlash === "") {
     pathContent = "/";
   } else {
-    pathContent = pathAfterSlash;
+    pathContent = path;
   }
 
   return (

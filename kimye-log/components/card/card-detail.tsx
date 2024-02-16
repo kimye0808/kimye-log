@@ -13,6 +13,9 @@ interface PropsType {
   date: string;
 }
 
+/**
+ * img가 없고 summary가 있는 card
+ */
 export default function CardDetail({
   summary,
   tags,

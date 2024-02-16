@@ -23,9 +23,19 @@
   transition: var(--transition-1);
 }
 
-.tag-btn img {
+.tag-btn2 {
   width: 100%;
-  max-width: 32px;
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  padding-right: 12px;
+  border-radius: var(--radius-12);
+  color: var(--text-yellow-green);
+}
+
+.tag-btn2:is(:hover, :focus-visible) {
+  transform: translateY(-2px);
+  transition: var(--transition-1);
 }
 
 .tags-flex {
