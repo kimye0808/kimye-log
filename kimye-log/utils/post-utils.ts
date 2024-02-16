@@ -4,7 +4,7 @@ import matter from "gray-matter";
 
 interface PostData {
   slug: string;
-  data: Object;
+  data: { [key: string]: any };
   content: string;
 }
 
@@ -16,11 +16,12 @@ const postsDirectory = path.join(process.cwd(), "posts");
  * 해당 경로에 있는 모든 파일 및 하위 디렉토리의 이름을 배열로 반환하는 비동기 함수
  */
 export async function getPostFiles() {
+  "use server";
   try {
     const files = await fs.readdir(postsDirectory);
     return files;
   } catch (error) {
-    console.error("Error reading post files:", error);
+    // console.error("Error reading post files:", error);
     return [];
   }
 }
@@ -31,6 +32,7 @@ export async function getPostFiles() {
 export async function getPostData(
   postIdentifier: string
 ): Promise<PostData | null> {
+  "use server";
   try {
     const postSlug = postIdentifier.replace(/\.md$/, "");
     const filePath = path.join(postsDirectory, `${postSlug}.md`);
@@ -40,7 +42,7 @@ export async function getPostData(
     const postData = { slug: postSlug, data: data, content: content };
     return postData;
   } catch (error) {
-    console.error(`Error reading post data for ${postIdentifier}:`, error);
+    // console.error(`Error reading post data for ${postIdentifier}:`, error);
     return null;
   }
 }
@@ -49,6 +51,7 @@ export async function getPostData(
  * 모든 post를 가져와서 정렬하여 반환하는 비동기 함수
  */
 export async function getAllPosts() {
+  "use server";
   try {
     const postsFiles = await getPostFiles();
 
@@ -57,7 +60,7 @@ export async function getAllPosts() {
         try {
           return await getPostData(postFile);
         } catch (error) {
-          console.error(`Error getting post data for ${postFile}:`, error);
+          // console.error(`Error getting post data for ${postFile}:`, error);
           return null; // 실패한 경우 null 반환
         }
       })
@@ -70,7 +73,7 @@ export async function getAllPosts() {
 
     return sortedPosts;
   } catch (error) {
-    console.error("Error getting all posts:", error);
+    // console.error("Error getting all posts:", error);
     return [];
   }
 }

@@ -1,12 +1,12 @@
 import Markdown from "react-markdown";
 import Image from "next/image";
-import customComponents from "@/components/common/customComponents";
+import customComponents from "@/components/common/custom-components";
 import classes from "./post-content.module.css";
 
 interface PostContetType {
   slug: string;
   image: string;
-  content: string;
+  content: string | undefined;
 }
 
 export default function PostContent({ slug, image, content }: PostContetType) {
