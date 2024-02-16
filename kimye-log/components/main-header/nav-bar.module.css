@@ -36,7 +36,7 @@
 .navbar-link {
   color: var(--text-light-green);
   font-weight: var(--weight-medium);
-  padding-block: 10px;
+  height: 60px;
 }
 
 .copyright-text {

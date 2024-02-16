@@ -10,24 +10,24 @@ interface NavLinkProps {
 
 export default function NavLink({ href, children }: NavLinkProps) {
   const path = usePathname();
-  const pathLength = path.length;
-  const pathAfterSlash = path.slice(1);
-
+  let isPath = false;
   //path "/"는 home버튼 클릭과 같기 때문에 해당 경우 고려
-  let pathContent: string;
-  if (pathLength === 1 && pathAfterSlash === "") {
-    pathContent = "/";
-  } else {
-    pathContent = path;
-  }
 
+  // href가 "/"이고 path가 "/"이 아닌 경우 또는 path가 href로 시작하는 경우 active 클래스 추가
+  if (href === "/") {
+    if (path === "/") {
+      isPath = true;
+    }
+  } else {
+    if (path.startsWith(href)) {
+      isPath = true;
+    }
+  }
   return (
     <Link
       href={href}
       className={
-        pathContent.startsWith(href)
-          ? `${classes.link} ${classes.active}`
-          : classes.link
+        isPath ? `${classes.link} ${classes.active}` : `${classes.link}`
       }
     >
       {children}

@@ -61,6 +61,7 @@ export default function NavBar() {
             <TfiMenu size="3rem" color="white" />
           </button>
         </div>
+
         <ul className={classes["navbar-list"]}>
           <li
             className={`${classes["navbar-link"]} hover-3`}
@@ -81,6 +82,7 @@ export default function NavBar() {
             <NavLink href="/about">About</NavLink>
           </li>
         </ul>
+
         <p className={classes["copyright-text"]}>
           Copyright 2024 © KimyeLog - kimye0808 &apos;s Blog. Developed by
           kimye0808
