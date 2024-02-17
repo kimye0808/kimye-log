@@ -2,6 +2,9 @@ import PostContent from "@/components/post/post-detail/post-content";
 import PostHeader from "@/components/post/post-detail/post-header";
 import { getPostData } from "@/utils/post-utils";
 
+import PostHeaderLoading from "@/components/loading/postl-header-loading";
+import PostContentLoading from "@/components/loading/postl-content-loading";
+
 interface PropsType {
   params: { slug: string };
 }

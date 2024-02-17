@@ -31,3 +31,24 @@
   font-size: var(--fontSize-9);
   color: var(--text-gray);
 }
+
+.loading {
+  background-color: var(--bg-light-gray);
+  border-radius: var(--radius-6);
+}
+
+.width100 {
+  display: inline-block;
+  width: 100px;
+}
+.width100b {
+  width: 100px;
+}
+
+.width85 {
+  width: 85%;
+}
+
+.width70 {
+  width: 70%;
+}
