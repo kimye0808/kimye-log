@@ -15,6 +15,7 @@
   --bg-emerald-green: hsl(151.76, 100%, 6.67%);
   --bg-delicate-beige: hsla(60, 25%, 95%, 1);
   --bg-inline-code: #e9ecef;
+  --bg-light-gray: #cccccc;
 
   /** Text colors */
   --text-white: hsla(0, 0%, 100%, 1);

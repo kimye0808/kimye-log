@@ -1,5 +1,5 @@
-import PostContent from "@/components/posts/post-detail/post-content";
-import PostHeader from "@/components/posts/post-detail/post-header";
+import PostContent from "@/components/post/post-detail/post-content";
+import PostHeader from "@/components/post/post-detail/post-header";
 import { getPostData } from "@/utils/post-utils";
 
 interface PropsType {

@@ -1,9 +1,9 @@
 import SearchAndTags from "@/components/search-post/search-tags";
-import PostsList from "@/components/post/posts-list";
 import PostsListWrapper from "@/components/post/posts-list-wrapper";
 import SearchTagsWrapper from "@/components/search-post/search-tags-wrapper";
+import PostsListLoading from "@/components/loading/posts-list-loading";
 
-export default function Posts() {
+export default function Loading() {
   return (
     <>
       <main>
@@ -13,7 +13,7 @@ export default function Posts() {
           </SearchTagsWrapper>
 
           <PostsListWrapper>
-            <PostsList />
+            <PostsListLoading />
           </PostsListWrapper>
         </article>
       </main>

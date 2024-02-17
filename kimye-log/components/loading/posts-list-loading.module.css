@@ -1,0 +1,10 @@
+.posts-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  position: relative;
+}
+
+.posts-list li {
+  width: 100%;
+}

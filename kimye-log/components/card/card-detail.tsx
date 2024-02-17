@@ -32,8 +32,8 @@ export default function CardDetail({
           <h3 className={`${classes} headline headline-4`}>
             <p className={`${classes["card-title"]} hover-2`}>{title}</p>
           </h3>
+          <p>{summary}</p>
         </summary>
-        <p>{summary}</p>
 
         <div className={`${classes["card-wrapper"]} card wrapper`}>
           <div className={`${classes["profile-card"]} profile-card`}>
