@@ -35,7 +35,7 @@ export default function CardDetail({
           <p>{summary}</p>
         </summary>
 
-        <div className={`${classes["card-wrapper"]} card wrapper`}>
+        <div className={`${classes["card-wrapper"]} `}>
           <div className={`${classes["profile-card"]} profile-card`}>
             {userImg && (
               <Image

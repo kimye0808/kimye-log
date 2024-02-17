@@ -1,0 +1,51 @@
+.loading-wrapper {
+  background: var(--bg-delicate-beige);
+  border-radius: var(--radius-12);
+  width: 100%;
+  padding: 20px;
+  position: relative;
+}
+.loading {
+  border-radius: var(--radius-12);
+  border: none;
+  background: var(--bg-light-gray);
+  height: 60%;
+  margin-block-end: 3px;
+}
+
+.card-wrapper {
+  margin-block-start: 12px;
+}
+
+.wrapper,
+.card-tag {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.image {
+  height: 17rem;
+}
+
+.logo {
+  width: 2.3rem;
+  height: auto;
+  border-radius: var(--radius-circle);
+}
+
+.width100b {
+  width: 100px;
+}
+
+.width85 {
+  width: 85%;
+}
+
+.width70 {
+  width: 70%;
+}
+
+.end {
+  margin-block-end: 3px;
+}

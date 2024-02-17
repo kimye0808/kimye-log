@@ -1,9 +1,9 @@
 import classes from "./tags-loading.module.css";
-import TagsFlex from "../tags/tags-flex";
+import TagsGrid from "../tags/tags-grid";
 import TagsWrapper from "../tags/tags-wrapper";
 import TagEmpty from "../tags/tag-empty";
 
-export default function TagsLoading() {
+export default function TagsGridLoading() {
   const tagsLoading = (
     <>
       <li>
@@ -27,7 +27,7 @@ export default function TagsLoading() {
     <>
       <TagsWrapper>
         <div className={classes["taggs-wrapper"]}>
-          <TagsFlex>{tagsLoading}</TagsFlex>
+          <TagsGrid>{tagsLoading}</TagsGrid>
         </div>
       </TagsWrapper>
     </>

@@ -45,12 +45,6 @@ export async function getPostData(
   }
 }
 
-function makeDelay() {
-  "use-client";
-  setTimeout(() => {
-    console.log("tt");
-  }, 3000);
-}
 /**
  * 모든 post를 가져와서 정렬하여 반환하는 비동기 함수
  */
@@ -77,6 +71,44 @@ export async function getAllPosts() {
     return sortedPosts;
   } catch (error) {
     // console.error("Error getting all posts:", error);
+    return [];
+  }
+}
+
+/**
+ * md파일을 읽어서 태그를 배열로 반환
+ */
+export async function getAllTags() {
+  try {
+    const postsFiles = await getPostFiles();
+
+    const allPosts = await Promise.all(
+      postsFiles.map(async (postFile) => {
+        try {
+          return await getPostData(postFile);
+        } catch (error) {
+          return null;
+        }
+      })
+    );
+    // 중복을 제거하기 위해 Set을 사용하여 모든 태그를 하나의 Set에 모음
+    const allTagsSet = new Set<string>();
+    allPosts.forEach((post) => {
+      if (post && post.data.tags) {
+        post.data.tags.forEach((tag: string) => {
+          allTagsSet.add(tag);
+        });
+      }
+    });
+
+    //Set을 다시 배열로 변환하여 객체에 번호를 붙여 반환: key로 index할려고 했는데 여전히 경고
+    const allTags = Array.from(allTagsSet).map((tag, index) => ({
+      id: index + 1,
+      tag,
+    }));
+
+    return allTags;
+  } catch (error) {
     return [];
   }
 }

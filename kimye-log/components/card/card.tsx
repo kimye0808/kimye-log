@@ -1,20 +1,23 @@
 import classes from "./card.module.css";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
+import { StaticImageData } from "next/image";
 import Link from "next/link";
 
 import { IoMdTime } from "react-icons/io";
 
 interface PropsType {
-  postImg: StaticImageData | null | string;
+  slug: string;
+  postImg: string;
   tags: string[] | null;
   readingTime: number;
   title: string;
-  userImg: StaticImageData | null | string;
+  userImg: StaticImageData | string;
   name: string;
   date: string;
 }
 
 export default function Card({
+  slug,
   postImg,
   tags,
   readingTime,
@@ -61,7 +64,10 @@ export default function Card({
         </div>
 
         <h3 className={`${classes} headline headline-4`}>
-          <Link href="/" className={`${classes["card-title"]} hover-2`}>
+          <Link
+            href={`/posts/${slug}`}
+            className={`${classes["card-title"]} hover-2`}
+          >
             {title}
           </Link>
         </h3>
@@ -74,14 +80,14 @@ export default function Card({
                 alt="writer image"
                 width={20}
                 height={20}
-                className={classes[`${classes} profile-banner`]}
+                className={`${classes} profile-banner`}
               />
             )}
             <div>
               <p className={`${classes["card-title"]}`}>{name}</p>
               <p className={`${classes["card-subtitle"]}`}>{date}</p>
             </div>
-            <Link href="/" className={classes["card-btn"]}>
+            <Link href={`/posts/${slug}`} className={classes["card-btn"]}>
               Read more
             </Link>
           </div>

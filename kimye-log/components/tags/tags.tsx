@@ -1,7 +1,9 @@
 import classes from "./tags.module.css";
 import Tag from "./tag";
+import { getAllTags } from "@/utils/post-utils";
 
-export default function Tags() {
+export default async function Tags() {
+  const allTags = await getAllTags();
   return (
     <>
       <section className={classes.tags}>
@@ -10,18 +12,11 @@ export default function Tags() {
             <span className={`${classes} span`}>Tags</span>
           </h2>
           <ul className={`${classes["grid-list"]} grid-list`}>
-            <li>
-              <Tag tagName={"fur"} />
-            </li>
-            <li>
-              <Tag tagName={"fur"} />
-            </li>
-            <li>
-              <Tag tagName={"fur"} />
-            </li>
-            <li>
-              <Tag tagName={"fur"} />
-            </li>
+            {allTags?.map((item) => (
+              <li key={item.id}>
+                <Tag tagName={item.tag} />
+              </li>
+            ))}
           </ul>
         </div>
       </section>
