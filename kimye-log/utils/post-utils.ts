@@ -16,7 +16,6 @@ const postsDirectory = path.join(process.cwd(), "posts");
  * 해당 경로에 있는 모든 파일 및 하위 디렉토리의 이름을 배열로 반환하는 비동기 함수
  */
 export async function getPostFiles() {
-  "use server";
   try {
     const files = await fs.readdir(postsDirectory);
     return files;
@@ -32,7 +31,6 @@ export async function getPostFiles() {
 export async function getPostData(
   postIdentifier: string
 ): Promise<PostData | null> {
-  "use server";
   try {
     const postSlug = postIdentifier.replace(/\.md$/, "");
     const filePath = path.join(postsDirectory, `${postSlug}.md`);
@@ -47,11 +45,16 @@ export async function getPostData(
   }
 }
 
+function makeDelay() {
+  "use-client";
+  setTimeout(() => {
+    console.log("tt");
+  }, 3000);
+}
 /**
  * 모든 post를 가져와서 정렬하여 반환하는 비동기 함수
  */
 export async function getAllPosts() {
-  "use server";
   try {
     const postsFiles = await getPostFiles();
 

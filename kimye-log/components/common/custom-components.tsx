@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { prism } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import classes from "@/components/posts/post-detail/post-content.module.css";
+import classes from "@/components/post/post-detail/post-content.module.css";
 import { Span } from "next/dist/trace";
 
 // 커스텀 스타일
