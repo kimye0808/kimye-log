@@ -18,7 +18,6 @@
   --bg-light-gray: #cccccc;
 
   /** Text colors */
-  --text-white: hsla(0, 0%, 100%, 1);
   --text-shadow-blue: hsla(217, 24%, 59%, 1);
   --text-slate-gray: hsla(217, 17%, 48%, 1);
   --text-deep-forest-green: hsla(155, 100%, 4%, 1);

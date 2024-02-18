@@ -3,6 +3,7 @@ import Card from "../card/card";
 import logoImg from "@/assets/logo.png";
 import Link from "next/link";
 import { getAllPosts } from "@/utils/post-utils";
+import React from "react";
 
 export default async function RecentPost() {
   const postsData = await getAllPosts(); //  [ { slug: postSlug, data: data, content: content }, ...]
@@ -17,20 +18,22 @@ export default async function RecentPost() {
           <ul className={classes["recent-list"]}>
             {postsData.map((post) => {
               return (
-                <>
-                  <li key={post!.slug}>
-                    <Card
-                      slug={post!.slug}
-                      postImg={`/images/posts/${post?.slug}/${post?.data?.image}`}
-                      tags={post?.data?.tags}
-                      readingTime={3}
-                      title={post?.data?.title}
-                      userImg={logoImg}
-                      name={"kimye0808"}
-                      date={post?.data?.date}
-                    />
-                  </li>
-                </>
+                post && (
+                  <React.Fragment key={post.slug}>
+                    <li>
+                      <Card
+                        slug={post!.slug}
+                        postImg={`/images/posts/${post?.slug}/${post?.data?.image}`}
+                        tags={post?.data?.tags}
+                        readingTime={3}
+                        title={post?.data?.title}
+                        userImg={logoImg}
+                        name={"kimye0808"}
+                        date={post?.data?.date}
+                      />
+                    </li>
+                  </React.Fragment>
+                )
               );
             })}
           </ul>

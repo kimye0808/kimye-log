@@ -101,12 +101,11 @@ export async function getAllTags() {
       }
     });
 
-    //Set을 다시 배열로 변환하여 객체에 번호를 붙여 반환: key로 index할려고 했는데 여전히 경고
+    // Set을 다시 배열로 변환하여 객체에 유니코드를 추가하여 반환
     const allTags = Array.from(allTagsSet).map((tag, index) => ({
-      id: index + 1,
+      id: String.fromCharCode(65 + index), // 'A'부터 시작하여 유니코드를 생성
       tag,
     }));
-
     return allTags;
   } catch (error) {
     return [];
