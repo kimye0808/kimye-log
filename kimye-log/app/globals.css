@@ -210,7 +210,6 @@ body.nav-active {
 }
 
 .hover-1,
-.hover-2,
 .hover-3 {
   transition: var(--transition-1);
 }
@@ -218,10 +217,6 @@ body.nav-active {
 .hover-1:is(:hover, :focus-visible) {
   color: var(--text-wild-blue-yonder);
   transform: translateX(3px);
-}
-
-.hover-2:is(:hover, :focus-visible) {
-  color: var(--text-carolina-blue);
 }
 
 .hover-3:is(:hover, :focus-visible) {

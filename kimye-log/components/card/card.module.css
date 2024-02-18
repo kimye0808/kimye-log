@@ -60,3 +60,11 @@
   border-radius: var(--radius-circle);
   z-index: -1;
 }
+
+.card-btn:is(:hover, :focus-within) {
+  color: var(--text-yellow-green);
+}
+
+.tag:is(:hover, :focus-within) {
+  color: var(--text-light-green);
+}

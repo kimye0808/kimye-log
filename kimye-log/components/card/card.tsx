@@ -48,8 +48,8 @@ export default function Card({
                 return (
                   <Link
                     key={tag}
-                    href="/"
-                    className={`${classes} span hover-2`}
+                    href={`/posts?tag=${tag}`}
+                    className={`${classes.tag} `}
                   >
                     {tag}
                   </Link>
