@@ -26,17 +26,15 @@ export default function CardDetailEmpty() {
           </div>
         </div>
 
-        <div>
-          <div className={`${classes["card-wrapper"]} card-wrapper`}>
-            <div className={classes["card-tag"]}>
-              <TagEmpty />
-              <TagEmpty />
-            </div>
-
-            <span
-              className={`${classes.loading} ${classes["reading-time"]} span`}
-            ></span>
+        <div className={`${classes["card-wrapper"]} card-wrapper`}>
+          <div className={classes["card-tag"]}>
+            <TagEmpty />
+            <TagEmpty />
           </div>
+
+          <span
+            className={`${classes.loading} ${classes["reading-time"]} span`}
+          ></span>
         </div>
       </div>
     </>

@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { RootState } from "@/lib/store";
 import { toggle } from "@/lib/features/header/headerSlice";
 import { TfiMenu } from "react-icons/tfi";
-import logoImg from "@/assets/logo_white.png";
+import logoImg from "@/assets/logo.png";
 import useDetectClose from "@/hooks/useDetectClose";
 import { useEffect, useRef } from "react";
 /**

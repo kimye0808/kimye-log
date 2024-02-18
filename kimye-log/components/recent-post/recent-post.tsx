@@ -1,12 +1,13 @@
 import classes from "./recent-post.module.css";
 import Card from "../card/card";
-import smile from "@/assets/card/smile.jpg";
-import teamwork from "@/assets/card/teamwork.jpg";
-import soccer from "@/assets/card/soccer.jpg";
 import logoImg from "@/assets/logo.png";
 import Link from "next/link";
+import { getAllPosts } from "@/utils/post-utils";
+import React from "react";
 
-export default function RecentPost() {
+export default async function RecentPost() {
+  const postsData = await getAllPosts(); //  [ { slug: postSlug, data: data, content: content }, ...]
+
   return (
     <>
       <section className={`${classes.recent} section `}>
@@ -15,41 +16,28 @@ export default function RecentPost() {
             <span className={`${classes} span`}>Recent Post</span>
           </h2>
           <ul className={classes["recent-list"]}>
-            <li>
-              <Card
-                postImg={smile}
-                tags={["#sports", "#smile"]}
-                readingTime={3}
-                title={"smile is good"}
-                userImg={logoImg}
-                name={"kimye0808"}
-                date={"24 Feb 2024"}
-              />
-            </li>
-            <li>
-              <Card
-                postImg={teamwork}
-                tags={["#sports", "#smile"]}
-                readingTime={3}
-                title={"smile is good"}
-                userImg={logoImg}
-                name={"kimye0808"}
-                date={"24 Feb 2024"}
-              />
-            </li>
-            <li>
-              <Card
-                postImg={soccer}
-                tags={["#sports", "#smile"]}
-                readingTime={3}
-                title={"smile is good"}
-                userImg={logoImg}
-                name={"kimye0808"}
-                date={"24 Feb 2024"}
-              />
-            </li>
+            {postsData.map((post) => {
+              return (
+                post && (
+                  <React.Fragment key={post.slug}>
+                    <li>
+                      <Card
+                        slug={post!.slug}
+                        postImg={`/images/posts/${post?.slug}/${post?.data?.image}`}
+                        tags={post?.data?.tags}
+                        readingTime={3}
+                        title={post?.data?.title}
+                        userImg={logoImg}
+                        name={"kimye0808"}
+                        date={post?.data?.date}
+                      />
+                    </li>
+                  </React.Fragment>
+                )
+              );
+            })}
           </ul>
-          <Link href="/" className={`${classes.btn} btn btn-secondary`}>
+          <Link href="/posts" className={`${classes.btn} btn btn-secondary`}>
             <span className={`${classes} span}`}>Show More Posts</span>
           </Link>
         </div>
