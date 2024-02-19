@@ -1,6 +1,9 @@
 import classes from "./search-tags.module.css";
 import SearchBar from "./search-bar";
 
+/**
+ * posts 페이지에 보여주는 검색바 + 태그 부분
+ */
 export default function SearchTagsWrapper({
   children,
 }: {

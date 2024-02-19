@@ -3,6 +3,9 @@ import Link from "next/link";
 import { getAllPosts } from "@/utils/post-utils";
 import RecentPostContent from "./recent-post-content";
 
+/**
+ * Home Page에서 뜨는 posts
+ */
 export default async function RecentPost() {
   let postsData = await getAllPosts(); //  [ { slug: postSlug, data: data, content: content }, ...]
   return (

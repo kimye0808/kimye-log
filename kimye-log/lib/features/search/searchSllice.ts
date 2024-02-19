@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getSearchResult } from "@/utils/post-utils";
 import { PostData } from "@/utils/post-utils";
 
-// First, create the thunk
+// First, create the thunk 공식문서 참고
 /**
  * input에 입력한 검색결과로 thunk middleware
  */
@@ -49,12 +49,17 @@ export const fetchRecentPosts = createAsyncThunk(
   }
 );
 
+/**
+ * type 및 initial state
+ */
 interface SearchState {
   posts: PostData[];
+  loading: "idle" | "pending" | "fulfilled" | "rejected";
 }
 
 const initialState: SearchState = {
   posts: [],
+  loading: "idle",
 };
 
 /**
@@ -77,14 +82,28 @@ const searchSlice = createSlice({
       //   }
       // });
       state.posts = action.payload.result;
+      state.loading = "fulfilled";
     }),
+      builder.addCase(searchPostByInput.pending, (state, action) => {
+        state.loading = "pending";
+      }),
+      //recent post
       builder.addCase(fetchRecentPosts.fulfilled, (state, action) => {
         const result = action.payload.result;
         state.posts = result;
+        state.loading = "fulfilled";
       }),
+      builder.addCase(fetchRecentPosts.pending, (state, action) => {
+        state.loading = "pending";
+      }),
+      //searchByTag
       builder.addCase(searchPostByTag.fulfilled, (state, action) => {
         const result = action.payload.result;
         state.posts = result;
+        state.loading = "fulfilled";
+      }),
+      builder.addCase(searchPostByTag.pending, (state, action) => {
+        state.loading = "pending";
       });
   },
 });
