@@ -1,5 +1,5 @@
 import classes from "./tags.module.css";
-import Image from "next/image";
+import Link from "next/link";
 
 interface PropsType {
   tagName: string;
@@ -7,9 +7,11 @@ interface PropsType {
 export default function TagWhite({ tagName }: PropsType) {
   return (
     <>
-      <button className={`${classes["tag-btn2"]}`}>
-        <p>{tagName}</p>
-      </button>
+      <Link href={`/posts?tag=${tagName}`}>
+        <button className={`${classes["tag-btn2"]}`}>
+          <p>{tagName}</p>
+        </button>
+      </Link>
     </>
   );
 }

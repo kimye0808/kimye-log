@@ -1,6 +1,10 @@
+import StoreProvider from "@/app/StoreProvider";
 import classes from "./posts-list.module.css";
 
-export default function PostsListWrapper({
+/**
+ * loading을 위한 postlist wrapper
+ */
+export default async function PostsListWrapper({
   children,
 }: {
   children: React.ReactNode;

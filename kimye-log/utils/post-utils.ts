@@ -2,7 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
 
-interface PostData {
+export interface PostData {
   slug: string;
   data: { [key: string]: any };
   content: string;
@@ -68,7 +68,7 @@ export async function getAllPosts() {
       .filter((post) => post !== null)
       .sort((postA, postB) => (postA!.data > postB!.data ? -1 : 1));
 
-    return sortedPosts;
+    return sortedPosts.filter((post) => post !== null) as PostData[];
   } catch (error) {
     // console.error("Error getting all posts:", error);
     return [];
@@ -107,6 +107,68 @@ export async function getAllTags() {
       tag,
     }));
     return allTags;
+  } catch (error) {
+    return [];
+  }
+}
+
+/**
+ * md파일을 읽어서 검색결과(제목, summary, tag)에 해당하는 post를 배열로 반환
+ */
+export async function getSearchResult(searchQuery: string) {
+  try {
+    const postsFiles = await getPostFiles();
+
+    const allPosts = await Promise.all(
+      postsFiles.map(async (postFile) => {
+        try {
+          return await getPostData(postFile);
+        } catch (error) {
+          return null;
+        }
+      })
+    );
+    const searchQ = searchQuery.toLowerCase();
+
+    const filteredPosts = allPosts.filter((post) => {
+      return (
+        post?.data.title.toLowerCase().includes(searchQ) ||
+        post?.data.tags.includes(searchQ) ||
+        post?.data.summary.toLowerCase().includes(searchQ) ||
+        post?.content.toLowerCase().includes(searchQ)
+      );
+    });
+
+    return filteredPosts.filter((post) => post !== null) as PostData[];
+  } catch (error) {
+    return [];
+  }
+}
+
+/**
+ * tag로 post 검색
+ */
+export async function getSearchByTags(tag: string) {
+  try {
+    const postsFiles = await getPostFiles();
+    const allPosts = await Promise.all(
+      postsFiles.map(async (postFile) => {
+        try {
+          return await getPostData(postFile);
+        } catch (error) {
+          return null;
+        }
+      })
+    );
+    const searchTag = tag.toLowerCase();
+
+    const filteredPosts = allPosts.filter((post) => {
+      return post?.data.tags.some((tagElem: string) => {
+        tagElem.toLowerCase() === searchTag;
+      });
+    });
+
+    return filteredPosts.filter((post) => post !== null) as PostData[];
   } catch (error) {
     return [];
   }

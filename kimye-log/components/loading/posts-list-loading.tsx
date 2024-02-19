@@ -10,9 +10,6 @@ export default function PostsListLoading() {
       <li>
         <CardDetailEmpty />
       </li>
-      <li>
-        <CardDetailEmpty />
-      </li>
     </>
   );
   return (

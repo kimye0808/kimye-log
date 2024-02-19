@@ -1,8 +1,10 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import headerSlice from "./features/header/headerSlice";
+import searchSllice from "./features/search/searchSllice";
 
 const rootReducer = combineReducers({
   header: headerSlice,
+  search: searchSllice,
 });
 
 export const makeStore = () => {

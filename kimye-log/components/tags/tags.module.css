@@ -14,11 +14,6 @@
 }
 
 .tag-btn:is(:hover, :focus-visible) {
-  box-shadow: var(--shadow-3);
-  background-image: linear-gradient(var(--bg-emerald-green), #000),
-    var(--gradient-1);
-  background-clip: padding-box, border-box;
-  border-color: transparent;
   transform: translateY(-2px);
   transition: var(--transition-1);
 }

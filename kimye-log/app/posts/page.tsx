@@ -12,9 +12,7 @@ export default function Posts() {
             <SearchAndTags />
           </SearchTagsWrapper>
 
-          <PostsListWrapper>
-            <PostsList />
-          </PostsListWrapper>
+          <PostsList />
         </article>
       </main>
     </>

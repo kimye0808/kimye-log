@@ -6,9 +6,15 @@
 }
 
 .active {
-  background: var(--text-mint-green);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text-yellow-green);
+  background-image: linear-gradient(var(--bg-emerald-green), #000),
+    var(--gradient-1);
+  border-radius: var(--radius-12);
+  background-clip: padding-box, border-box;
+  border-color: transparent;
   font-weight: bold;
+}
+
+.active2 {
+  color: var(--text-yellow-green);
 }

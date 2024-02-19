@@ -12,6 +12,9 @@ export default async function SearchAndTags() {
       <TagsWrapper>
         <div className={classes["tags-wrapper"]}>
           <TagsFlex>
+            <li>
+              <Tag tagName={"전체보기"} />
+            </li>
             {allTags?.map((item) => (
               <li key={item.id}>
                 <Tag tagName={item.tag}></Tag>
