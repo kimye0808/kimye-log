@@ -77,7 +77,6 @@ export default function PostsListContent({ initialList }: Propstype) {
                     <CardDetail
                       summary={post?.data?.summary}
                       tags={post?.data?.tags}
-                      readingTime={3}
                       title={post?.data?.title}
                       userImg={logoImg}
                       name={"kimye0808"}

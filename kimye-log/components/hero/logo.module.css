@@ -1,6 +1,8 @@
 .logo {
+  display: block;
   max-width: max-content;
   margin-inline: auto;
+  margin: auto;
   transition: opacity 0.5s ease-in-out;
 }
 
@@ -9,6 +11,19 @@
   z-index: 1;
 
   animation: heroDecoAnim1 3s linear infinite alternate;
+}
+.bee {
+  top: 40px;
+  right: 100px;
+  animation: beeAnim1 3s linear infinite alternate;
+}
+@keyframes beeAnim1 {
+  0% {
+    transform: translateY(40px) rotate(0);
+  }
+  100% {
+    transform: translateY(-20px) rotate(0.3);
+  }
 }
 
 @keyframes heroDecoAnim1 {

@@ -17,7 +17,7 @@ export default async function RecentPost() {
           </h2>
           <RecentPostContent postsData={postsData} />
           <Link href="/posts" className={`${classes.btn} btn btn-secondary`}>
-            <span className={`${classes} span}`}>Show More Posts</span>
+            <span>Show More Posts</span>
           </Link>
         </div>
       </section>

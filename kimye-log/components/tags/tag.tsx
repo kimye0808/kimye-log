@@ -12,7 +12,7 @@ export default function Tag({ tagName }: PropsType) {
     <>
       <NavLink href={isAll ? "/posts" : `/posts?tag=${tagName}`}>
         <button className={`${classes["tag-btn"]}`}>
-          <p>{tagName}</p>
+          {isAll ? <p>{`${tagName}`}</p> : <p>{`#${tagName}`}</p>}
         </button>
       </NavLink>
     </>

@@ -9,32 +9,27 @@ export default function CardEmpty() {
           &nbsp;
         </figure>
 
-        <div>
-          <div
-            className={`${classes["card-wrapper"]} ${classes.end} card-wrapper`}
-          >
-            <div className={classes["card-tag"]}>
-              <TagEmpty />
-              <TagEmpty />
+        <div className={classes["card-content"]}>
+          <p className={`${classes.loading} ${classes.width100}`}>&nbsp;</p>
+
+          <div>
+            <div className={"profile-card"}>
+              <div>
+                <p className={`${classes["loading"]} ${classes.width100b}`}>
+                  &nbsp;
+                </p>
+              </div>
             </div>
-            <TagEmpty />
           </div>
-        </div>
 
-        <p className={`${classes.loading}`}>&nbsp;</p>
-
-        <div>
-          <div className={"profile-card"}>
-            <figure className={`${classes.loading} ${classes.logo}`}>
-              &nbsp;
-            </figure>
-            <div>
-              <p className={`${classes["loading"]} ${classes.width100b}`}>
-                &nbsp;
-              </p>
-              <p className={`${classes["loading"]} ${classes.width100b}`}>
-                &nbsp;
-              </p>
+          <div>
+            <div
+              className={`${classes["card-wrapper"]} ${classes.end} card-wrapper`}
+            >
+              <div className={classes["card-tag"]}>
+                <TagEmpty />
+                <TagEmpty />
+              </div>
             </div>
           </div>
         </div>
