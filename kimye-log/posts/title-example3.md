@@ -3,7 +3,7 @@ id: 1
 title: "title example3"
 date: "2024-02-07"
 image: "title-example.png"
-tags: ["react", "nextjs"]
+tags: ["hello", "tag"]
 summary: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. At eaque similique quae voluptates impedit. Fuga numquam unde cumque quod ullam amet asperiores, quidem temporibus eos adipisci beatae perferendis, eveniet molestias?"
 ---
 

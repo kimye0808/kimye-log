@@ -13,6 +13,9 @@
   margin-block-start: 30px;
 }
 
+.btn:is(:hover, :focus-within) {
+  background-image: var(--gradient-1);
+}
 /**
 *  media queries
 */

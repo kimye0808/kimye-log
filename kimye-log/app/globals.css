@@ -14,6 +14,8 @@
   --bg-light-gray: #cccccc; /*ddddddddddddddd*/
 
   /** Text colors */
+  --text-white: #fff;
+  --text-black: #000;
   --text-deep-forest-green: hsla(155, 100%, 4%, 1); /*ddddddddddddddd*/
   --text-light-green: rgb(242, 255, 251); /*ddddddddddddddd*/
   --text-emerald-green: hsl(151.76, 100%, 6.67%);
@@ -87,6 +89,32 @@
   --cubic-out: cubic-bezier(0.05, 0.83, 0.52, 0.97); /*ddddddddddddddd*/
 }
 
+[data-theme="dark"] {
+  --bg-frost-white: black; /*ddddddddddddddd*/
+  --bg-emerald-green: black; /*ddddddddddddddd*/
+  --bg-delicate-beige: black; /*dd*/
+  --bg-light-gray: #cccccc; /*ddddddddddddddd*/
+
+  /** Text colors */
+  --text-black: white;
+  --text-deep-forest-green: white; /*ddddddddddddddd*/
+  --text-light-green: white; /*ddddddddddddddd*/
+  --text-emerald-green: #9bcf53;
+  --text-yellow-green: #9bcf53; /*ddddddddddddddd*/
+  --text-gray: #c7c8cc; /*ddddddddddddddd*/
+  --text-orange: #f99417;
+  --text-purple: white;
+  /** Gradient colors */
+  --gradient-1: linear-gradient(90deg, #9bcf53, #d1dd00 99%);
+  --gradient-2: linear-gradient(90deg, #03c75a, #9bcf53 1%);
+  --gradient-3: linear-gradient(0deg, #000d1a, transparent); /*ddddddddddddddd*/
+
+  /** Border colors */
+  --border-white: hsl(0, 0%, 100%); /*ddddddddddddddd*/
+  --border-gray: #c7c8cc; /*ddddddddddddddd*/
+  --border-black: #000;
+}
+
 /*-----------------------------------*\
   #RESET
 \*-----------------------------------*/
@@ -147,7 +175,7 @@ html {
 }
 
 body {
-  background-color: white;
+  background-color: var(--bg-frost-white);
   color: var(--text-deep-forest-green);
   font-family: var(--fontFamily-noto_sans);
   font-size: var(--fontSize-4);
@@ -161,7 +189,7 @@ body.nav-active {
 
 ::-webkit-scrollbar {
   width: 5px;
-  height: 10px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -210,7 +238,7 @@ body.nav-active {
 .profile-card .profile-banner {
   /*ddddddddddddddd*/
   border-radius: var(--radius-circle);
-  background-color: white;
+  background-color: var(--bg-frost-white);
 }
 
 .headline {
@@ -252,7 +280,7 @@ body.nav-active {
   background-image: var(--gradient-2);
   background-size: 200%;
   background-position: left;
-  color: white;
+  color: var(--text-white);
   font-size: var(--fontSize-6);
   font-weight: var(--weight-bold);
   max-width: max-content;
@@ -275,14 +303,14 @@ body.nav-active {
 
 .card {
   /*ddddddddddddddd*/
-  background-color: white;
-  color: black;
+  background-color: var(--bg-frost-white);
+  color: var(--text-black);
   box-shadow: var(--shadow-3);
 }
 .card2 {
   /*ddddddddddddddd*/
-  background-color: white;
-  color: black;
+  background-color: var(--bg-frost-white);
+  color: var(--text-black);
 }
 
 .img-cover {

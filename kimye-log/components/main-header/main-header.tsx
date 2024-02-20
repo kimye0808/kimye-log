@@ -5,6 +5,7 @@ import classes from "./main-header.module.css";
 import NavBar from "./nav-bar";
 import MenuButton from "./menu-button";
 import StoreProvider from "@/app/StoreProvider";
+import ThemeButton from "./theme-button";
 
 export default function MainHeader() {
   return (
@@ -15,6 +16,9 @@ export default function MainHeader() {
             <Image src={logoImg} alt="logo" />
             Kimye0808
           </Link>
+
+          <ThemeButton />
+
           <StoreProvider>
             <NavBar />
             <MenuButton />

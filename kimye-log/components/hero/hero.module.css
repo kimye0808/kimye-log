@@ -1,6 +1,5 @@
 .hero {
   padding-block-start: calc(var(--section-padding) + 50px);
-  background-color: white;
   box-shadow: var(--shadow-2);
   overflow: hidden;
 }

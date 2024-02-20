@@ -3,10 +3,11 @@ import Image from "next/image";
 import NavLink from "../common/nav-link";
 
 interface PropsType {
+  keyVal: string;
   tagName: string;
 }
-export default function Tag({ tagName }: PropsType) {
-  const isAll = tagName === "전체보기" ? true : false;
+export default function Tag({ keyVal, tagName }: PropsType) {
+  const isAll = keyVal === "all" ? true : false;
 
   return (
     <>

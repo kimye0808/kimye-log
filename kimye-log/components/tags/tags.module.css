@@ -80,7 +80,6 @@
 @media (min-width: 1200px) {
   .tags {
     padding-block: calc(var(--section-padding));
-    width: 80%;
   }
   .tags .grid-list {
     display: flex;
