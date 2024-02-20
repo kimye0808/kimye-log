@@ -74,3 +74,60 @@
   right: 30px;
   animation: heroDecoAnim3 4s linear infinite alternate;
 }
+
+/**
+*  media queries
+*/
+@media (min-width: 575px) {
+  .shape-1 {
+    right: 150px;
+  }
+
+  .shape-2 {
+    left: 100px;
+  }
+
+  .shape-3 {
+    left: 100px;
+  }
+
+  .shape-4 {
+    right: 100px;
+  }
+}
+
+@media (min-width: 992px) {
+  .shape-1 {
+    right: 350px;
+  }
+
+  .shape-2 {
+    left: 300px;
+  }
+
+  .shape-3 {
+    left: 300px;
+  }
+
+  .shape-4 {
+    right: 300px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .shape-1 {
+    right: 550px;
+  }
+
+  .shape-2 {
+    left: 500px;
+  }
+
+  .shape-3 {
+    left: 500px;
+  }
+
+  .shape-4 {
+    right: 500px;
+  }
+}

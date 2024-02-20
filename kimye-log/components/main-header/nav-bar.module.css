@@ -1,3 +1,6 @@
+.menu-btn {
+  visibility: visible;
+}
 .navbar {
   position: absolute;
   top: 0;
@@ -13,7 +16,7 @@
   transition: 0.25s var(--cubic-in);
 }
 
-.navbar.active {
+.active {
   transform: translateX(-340px);
   visibility: visible;
   transition: 0.5s var(--cubic-out);
@@ -42,4 +45,56 @@
 .copyright-text {
   color: black;
   font-size: var(--fontSize-8);
+}
+
+/**
+*   media queries
+*/
+@media (min-width: 768px) {
+  .menu-btn {
+    visibility: hidden;
+  }
+  .navbar {
+    position: absolute;
+    visibility: visible;
+    top: 0;
+    right: 50%;
+    left: 50%;
+    width: 400px;
+    height: 100%;
+    padding: 0;
+    transform: none;
+    transition: none;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .active {
+    transform: none;
+    transition: none;
+  }
+  .navbar-top {
+    display: none;
+    visibility: hidden;
+  }
+  .navbar-top {
+    padding-block-end: 0;
+    margin-block-end: 0;
+  }
+  .navbar-list {
+    width: 200px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-block-end: 0;
+    gap: 100px;
+    border-block-end: 0;
+  }
+  .copyright-text {
+    visibility: hidden;
+  }
 }

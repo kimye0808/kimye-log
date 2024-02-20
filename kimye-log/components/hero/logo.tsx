@@ -33,13 +33,13 @@ export default function Logo() {
         height="400"
         className={classes["logo"]}
       />
-      {/* <DiCss3 size="32" className={`${classes.shape} ${classes["shape-1"]}`} />
+      <DiCss3 size="32" className={`${classes.shape} ${classes["shape-1"]}`} />
       <DiHtml5 size="35" className={`${classes.shape} ${classes["shape-2"]}`} />
       <DiJsBadge
         size="24"
         className={`${classes.shape} ${classes["shape-3"]}`}
       />
-      <DiReact size="30" className={`${classes.shape} ${classes["shape-4"]}`} /> */}
+      <DiReact size="30" className={`${classes.shape} ${classes["shape-4"]}`} />
     </>
   );
 }

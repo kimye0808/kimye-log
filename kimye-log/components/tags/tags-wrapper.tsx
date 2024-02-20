@@ -4,6 +4,9 @@ interface PropsType {
   children: React.ReactNode;
 }
 
+/**
+ * tags loading 용도
+ */
 export default function TagsWrapper({ children }: PropsType) {
   return (
     <>

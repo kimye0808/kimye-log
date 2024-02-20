@@ -12,7 +12,9 @@ export default async function RecentPost() {
     <>
       <section className={`${classes.recent} section `}>
         <div className={`${classes} container`}>
-          <h2 className={`${classes} headline headline-2 section-title`}>
+          <h2
+            className={`${classes.headline} headline headline-2 section-title`}
+          >
             <span className={`${classes} span`}>Recent Post</span>
           </h2>
           <RecentPostContent postsData={postsData} />
