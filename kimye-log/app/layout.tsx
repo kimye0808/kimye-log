@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import MainHeader from "@/components/main-header/main-header";
+import ThemeProviders from "./ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Kimye0808's blog",
@@ -13,10 +14,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="light" style={{ colorScheme: "light" }}>
       <body>
-        <MainHeader />
-        {children}
+        <ThemeProviders>
+          <MainHeader />
+          {children}
+        </ThemeProviders>
       </body>
     </html>
   );

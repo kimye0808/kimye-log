@@ -1,16 +1,15 @@
 .loading-wrapper {
-  background: var(--bg-delicate-beige);
-  border-radius: var(--radius-12);
   width: 100%;
-  padding: 20px;
   position: relative;
 }
 .loading {
-  border-radius: var(--radius-12);
   border: none;
   background: var(--bg-light-gray);
-  height: 60%;
   margin-block-end: 3px;
+}
+
+.card-content {
+  padding: 20px;
 }
 
 .card-wrapper {
@@ -28,18 +27,12 @@
   height: 17rem;
 }
 
-.logo {
-  width: 2.3rem;
-  height: auto;
-  border-radius: var(--radius-circle);
-}
-
 .width100b {
   width: 100px;
 }
 
-.width85 {
-  width: 85%;
+.width100 {
+  width: 100%;
 }
 
 .width70 {

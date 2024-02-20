@@ -1,0 +1,16 @@
+.btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 60px;
+}
+
+/**
+*  media queries
+*/
+
+@media (min-width: 992px) {
+  .btn {
+    right: 16px;
+  }
+}

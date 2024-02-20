@@ -25,7 +25,7 @@ export default function RecentPostLoading() {
           </h2>
           <ul className={classes["recent-list"]}>{cardLoading}</ul>
           <Link href="/posts" className={`${classes.btn} btn btn-secondary`}>
-            <span className={`${classes} span}`}>Show More Posts</span>
+            <span>Show More Posts</span>
           </Link>
         </div>
       </section>

@@ -1,7 +1,7 @@
 ---
-title: Mastering JavaScript
+title: Teamwork Is Good
 date: "2021-10-30"
-image: mastering-js-thumb.png
+image: teamwork.png
 tags: ["javascript"]
 summary: JavaScript is the most important programming language for web development. You probably don't know it well enough!
 ---

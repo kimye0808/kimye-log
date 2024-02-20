@@ -5,6 +5,7 @@ import Tags from "@/components/tags/tags";
 import { Suspense } from "react";
 import RecentPostLoading from "@/components/loading/recent-post-loading";
 import TagsGridLoading from "@/components/loading/tags-grid-loading";
+import classes from "./page.module.css";
 
 export default function Home() {
   return (
@@ -12,12 +13,14 @@ export default function Home() {
       <main>
         <article>
           <Hero />
-          <Suspense fallback={<RecentPostLoading />}>
-            <RecentPost />
-          </Suspense>
-          <Suspense fallback={<TagsGridLoading />}>
-            <Tags />
-          </Suspense>
+          <div className={classes.contents}>
+            <Suspense fallback={<RecentPostLoading />}>
+              <RecentPost />
+            </Suspense>
+            <Suspense fallback={<TagsGridLoading />}>
+              <Tags />
+            </Suspense>
+          </div>
         </article>
       </main>
     </>

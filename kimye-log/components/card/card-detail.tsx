@@ -1,12 +1,10 @@
 import classes from "./card.module.css";
-import Link from "next/link";
 import Image, { StaticImageData } from "next/image";
 import { IoMdTime } from "react-icons/io";
 
 interface PropsType {
   summary: string;
   tags: string[] | null;
-  readingTime: number;
   title: string;
   userImg: StaticImageData | null | string;
   name: string;
@@ -19,7 +17,6 @@ interface PropsType {
 export default function CardDetail({
   summary,
   tags,
-  readingTime,
   title,
   userImg,
   name,
@@ -27,10 +24,12 @@ export default function CardDetail({
 }: PropsType) {
   return (
     <>
-      <div className={`${classes["recent-card"]} card`}>
+      <div
+        className={`${classes["recent-card"]} ${classes["card-content"]} card2`}
+      >
         <summary>
           <h3 className={`${classes} headline headline-4`}>
-            <p className={`${classes["card-title"]} hover-2`}>{title}</p>
+            <p className={`${classes["card-title"]}`}>{title}</p>
           </h3>
           <p>{summary}</p>
         </summary>
@@ -57,17 +56,9 @@ export default function CardDetail({
           <div className={`${classes["card-wrapper"]} card-wrapper`}>
             <div className={classes["card-tag"]}>
               {tags?.map((tag) => {
-                return (
-                  <p key={tag} className={`${classes} span hover-2`}>
-                    {tag}&nbsp;
-                  </p>
-                );
+                return <p key={tag}>{`#${tag} `}</p>;
               })}
             </div>
-            <div className={`${classes} wrapper`}>
-              <IoMdTime />
-            </div>
-            <span className={`${classes} span`}>{readingTime} mins read</span>
           </div>
         </div>
       </div>

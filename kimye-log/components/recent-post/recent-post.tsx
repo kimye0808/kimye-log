@@ -12,12 +12,14 @@ export default async function RecentPost() {
     <>
       <section className={`${classes.recent} section `}>
         <div className={`${classes} container`}>
-          <h2 className={`${classes} headline headline-2 section-title`}>
+          <h2
+            className={`${classes.headline} headline headline-2 section-title`}
+          >
             <span className={`${classes} span`}>Recent Post</span>
           </h2>
           <RecentPostContent postsData={postsData} />
           <Link href="/posts" className={`${classes.btn} btn btn-secondary`}>
-            <span className={`${classes} span}`}>Show More Posts</span>
+            <span>Show More Posts</span>
           </Link>
         </div>
       </section>

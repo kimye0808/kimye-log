@@ -1,7 +1,6 @@
 .hero {
   padding-block-start: calc(var(--section-padding) + 50px);
-  background-color: var(--bg-frost-white);
-  box-shadow: var(--shadow-1);
+  box-shadow: var(--shadow-2);
   overflow: hidden;
 }
 .hero .container {
@@ -21,4 +20,31 @@
 
 .hero-banner {
   position: relative;
+}
+
+/**
+*  media queries
+*/
+@media (min-width: 575px) {
+  .hero-content {
+    padding-inline: 100px;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-content {
+    padding-inline: 200px;
+  }
+}
+
+@media (min-width: 992px) {
+  .hero-content {
+    padding-inline: 300px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero-content {
+    padding-inline: 400px;
+  }
 }

@@ -58,7 +58,7 @@ export default function NavBar() {
             <Image src={logoImg} alt="kimye0808 logo" width="20" height="20" />
           </Link>
           <button onClick={toggleVisible}>
-            <TfiMenu size="3rem" color="white" />
+            <TfiMenu size="3rem" style={{ color: `var(--text-black)` }} />
           </button>
         </div>
 

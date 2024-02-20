@@ -1,6 +1,4 @@
 .recent-card {
-  padding: 20px;
-  border-radius: var(--radius-16);
   transition: var(--transition-1);
 }
 
@@ -9,24 +7,24 @@
 }
 
 .card-banner {
-  border-radius: var(--radius-16);
+  border: none;
   overflow: hidden;
+}
+
+.card-content {
+  padding: 20px;
 }
 
 .card-wrapper {
   margin-block-start: 12px;
-}
-
-.profile-card :is(.card-title, .card-subtitle) {
-  color: var(--text-light-green);
+  box-shadow: none;
 }
 
 .profile-card .card-title {
-  color: var(--text-light-green);
+  color: black;
   font-weight: var(--weight-bold);
 }
 
-.wrapper,
 .card-tag {
   display: flex;
   gap: 3px;
@@ -43,28 +41,14 @@
   margin-block-end: 0;
 }
 
-.card-wrapper .card-btn {
-  position: relative;
-  color: var(--text-wild-blue-yonder);
-  z-index: 1;
+.card-btn {
+  display: flex;
+  align-items: center;
 }
-
-.card-wrapper .card-btn::before {
-  content: "";
-  position: absolute;
-  top: -13px;
-  left: -20px;
-  width: 48px;
-  height: 48px;
-  background-color: var(--bg-oxford-blue-2);
-  border-radius: var(--radius-circle);
-  z-index: -1;
-}
-
 .card-btn:is(:hover, :focus-within) {
-  color: var(--text-yellow-green);
+  color: var(--text-orange);
 }
 
 .tag:is(:hover, :focus-within) {
-  color: var(--text-light-green);
+  color: var(--text-orange);
 }

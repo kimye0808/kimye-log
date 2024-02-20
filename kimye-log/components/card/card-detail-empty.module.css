@@ -1,13 +1,9 @@
 .loading-wrapper {
-  background: var(--bg-delicate-beige);
-  border-radius: var(--radius-12);
   width: 100%;
-  padding: 20px;
   position: relative;
 }
 
 .loading {
-  border-radius: var(--radius-12);
   border: none;
   background: var(--bg-light-gray);
   height: 85%;
@@ -15,7 +11,6 @@
 }
 
 .loading2 {
-  border-radius: var(--radius-12);
   border: none;
   background: var(--bg-light-gray);
   height: 85%;
@@ -23,16 +18,13 @@
   margin-block-end: 2px;
 }
 
+.card-content {
+  padding: 20px;
+}
+
 .p {
   width: 120px;
   height: 20px;
-  border-radius: (--var-radius-12);
-}
-
-.reading-time {
-  width: 100px;
-  height: 20px;
-  border-radius: (--var-radius-12);
 }
 
 .card-wrapper {
@@ -49,10 +41,4 @@
 .card-wrapper:last-child {
   font-size: var(--fontSize-4);
   margin-block-end: 0;
-}
-
-.card-wrapper .card-btn {
-  position: relative;
-  color: var(--text-wild-blue-yonder);
-  z-index: 1;
 }
