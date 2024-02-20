@@ -36,3 +36,30 @@
 .end {
   margin-block-end: 3px;
 }
+
+@media (min-width: 575px) {
+  .section {
+    margin-inline: 50px;
+  }
+}
+@media (min-width: 768px) {
+  .section {
+    margin-inline: 100px;
+  }
+}
+@media (min-width: 992px) {
+  .section {
+    margin-inline: 250px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .section {
+    margin-inline: 350px;
+  }
+}
+@media (min-width: 1500px) {
+  .section {
+    margin-inline: 450px;
+  }
+}

@@ -15,7 +15,6 @@
   border: 2px solid var(--border-gray);
   border-radius: var(--radius-8);
   padding: 20px;
-  display: flex;
 }
 
 .search-bar .icon {
@@ -38,4 +37,37 @@
   overflow-x: auto; /* 가로 방향 스크롤 표시 설정 */
   max-height: 100%; /* 최대 높이 지정 */
   font-size: var(--fontSize-9);
+}
+
+/**
+*  media queries
+*/
+@media (min-width: 575px) {
+  .section {
+    margin-inline: 50px;
+  }
+  .search-bar input {
+    top: 0.6rem;
+  }
+}
+@media (min-width: 768px) {
+  .section {
+    margin-inline: 100px;
+  }
+}
+@media (min-width: 992px) {
+  .section {
+    margin-inline: 250px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .section {
+    margin-inline: 350px;
+  }
+}
+@media (min-width: 1500px) {
+  .section {
+    margin-inline: 450px;
+  }
 }

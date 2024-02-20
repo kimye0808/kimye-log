@@ -1,7 +1,10 @@
 .tags {
   width: 100%;
 }
-.tags .grid-list {
+.tags-wrapper {
+  width: 100%;
+}
+.grid-list {
   grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
   grid-gap: 8px;
   color: var(--text-emerald-green);
@@ -55,6 +58,7 @@
   align-items: center;
   flex-direction: row;
   gap: 2px;
+  font-size: var(--fontSize-8);
 }
 
 /**

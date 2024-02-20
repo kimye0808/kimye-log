@@ -150,7 +150,7 @@ body {
   background-color: white;
   color: var(--text-deep-forest-green);
   font-family: var(--fontFamily-noto_sans);
-  font-size: 1.6rem;
+  font-size: var(--fontSize-4);
   line-height: var(--lineHeight-4);
   overflow-y: overlay;
 }
@@ -316,4 +316,26 @@ body.nav-active {
   align-items: center;
   font-size: var(--fontSize-6);
   margin-block: 20px;
+}
+
+/**
+*   media queries
+*/
+
+@media (min-width: 575px) {
+  :root {
+    --fontSize-1: 4.5rem;
+    --fontSize-4: 2rem;
+    --fontSize-6: 1.8rem;
+    --fontSize-8: 1.6rem;
+  }
+}
+@media (min-width: 768px) {
+}
+@media (min-width: 992px) {
+}
+
+@media (min-width: 1200px) {
+}
+@media (min-width: 1500px) {
 }

@@ -10,7 +10,7 @@ interface PropsType {
 export default function TagsWrapper({ children }: PropsType) {
   return (
     <>
-      <section className={classes.tags}>
+      <section className={classes["tags-wrapper"]}>
         <div className={`${classes} container`}>
           <h2 className={`${classes} headline headline-2 section-title`}>
             <span className={`${classes} span`}>Tags</span>
