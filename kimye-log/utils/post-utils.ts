@@ -71,7 +71,7 @@ export async function getAllPosts() {
     return sortedPosts.filter((post) => post !== null) as PostData[];
   } catch (error) {
     // console.error("Error getting all posts:", error);
-    return [];
+    throw error;
   }
 }
 

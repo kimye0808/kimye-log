@@ -2,9 +2,15 @@ import StoreProvider from "@/app/StoreProvider";
 import classes from "./posts-list.module.css";
 import PostsListContent from "./posts-list-content";
 import { getAllPosts } from "@/utils/post-utils";
+import { PostData } from "@/utils/post-utils";
 
 export default async function PostsList() {
-  const initialList = await getAllPosts();
+  let initialList: PostData[];
+  try {
+    initialList = await getAllPosts(); //  [ { slug: postSlug, data: data, content: content }, ...]
+  } catch (error) {
+    throw new Error("get posts-list fail");
+  }
   return (
     <>
       <section className={`${classes.section} section`}>
