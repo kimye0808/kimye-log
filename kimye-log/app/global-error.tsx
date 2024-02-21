@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * root layout에서 error발생시
+ */
 export default function GlobalError({
   error,
   reset,
