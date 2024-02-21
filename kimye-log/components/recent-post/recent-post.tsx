@@ -2,12 +2,17 @@ import classes from "./recent-post.module.css";
 import Link from "next/link";
 import { getAllPosts } from "@/utils/post-utils";
 import RecentPostContent from "./recent-post-content";
-
+import { PostData } from "@/utils/post-utils";
 /**
  * Home Page에서 뜨는 posts
  */
 export default async function RecentPost() {
-  let postsData = await getAllPosts(); //  [ { slug: postSlug, data: data, content: content }, ...]
+  let postsData: PostData[];
+  try {
+    postsData = await getAllPosts(); //  [ { slug: postSlug, data: data, content: content }, ...]
+  } catch (error) {
+    throw new Error("get recent-posts fail");
+  }
   return (
     <>
       <section className={`${classes.recent} section `}>

@@ -8,22 +8,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 export default function SearchBar() {
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
-  // const searchParams = useSearchParams();
-  /**
-   * 검색어 입력시 url을 posts?q=검색어 로 바꾼다
-   */
-  // const fromHomeTagClick = searchParams.get("tag") && searchQuery === "";
-
-  // useEffect(() => {
-  //   //home에서 태그 타고 들어올 경우 reset방지용 if
-  //   if (!fromHomeTagClick) {
-  //     const queryParams =
-  //       searchQuery.trim() !== ""
-  //         ? `?q=${encodeURIComponent(searchQuery)}`
-  //         : "";
-  //     router.push(`/posts${queryParams}`);
-  //   }
-  // }, [searchQuery, router]);
 
   /**
    * input change handler

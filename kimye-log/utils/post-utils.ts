@@ -11,7 +11,6 @@ export interface PostData {
 // posts dir 경로
 const postsDirectory = path.join(process.cwd(), "posts");
 
-//동기로 해도 되지만 lazy loading 해볼려고 비동기
 /**
  * 해당 경로에 있는 모든 파일 및 하위 디렉토리의 이름을 배열로 반환하는 비동기 함수
  */
@@ -20,8 +19,8 @@ export async function getPostFiles() {
     const files = await fs.readdir(postsDirectory);
     return files;
   } catch (error) {
-    // console.error("Error reading post files:", error);
-    return [];
+    console.error("Error reading post files:", error);
+    throw error;
   }
 }
 
@@ -41,7 +40,7 @@ export async function getPostData(
     return postData;
   } catch (error) {
     // console.error(`Error reading post data for ${postIdentifier}:`, error);
-    return null;
+    throw error;
   }
 }
 
@@ -71,7 +70,7 @@ export async function getAllPosts() {
     return sortedPosts.filter((post) => post !== null) as PostData[];
   } catch (error) {
     // console.error("Error getting all posts:", error);
-    return [];
+    throw error;
   }
 }
 
@@ -80,17 +79,7 @@ export async function getAllPosts() {
  */
 export async function getAllTags() {
   try {
-    const postsFiles = await getPostFiles();
-
-    const allPosts = await Promise.all(
-      postsFiles.map(async (postFile) => {
-        try {
-          return await getPostData(postFile);
-        } catch (error) {
-          return null;
-        }
-      })
-    );
+    const allPosts = await getAllPosts();
     // 중복을 제거하기 위해 Set을 사용하여 모든 태그를 하나의 Set에 모음
     const allTagsSet = new Set<string>();
     allPosts.forEach((post) => {
@@ -108,7 +97,7 @@ export async function getAllTags() {
     }));
     return allTags;
   } catch (error) {
-    return [];
+    throw error;
   }
 }
 
@@ -117,17 +106,8 @@ export async function getAllTags() {
  */
 export async function getSearchResult(searchQuery: string) {
   try {
-    const postsFiles = await getPostFiles();
+    const allPosts = await getAllPosts();
 
-    const allPosts = await Promise.all(
-      postsFiles.map(async (postFile) => {
-        try {
-          return await getPostData(postFile);
-        } catch (error) {
-          return null;
-        }
-      })
-    );
     const searchQ = searchQuery.toLowerCase();
 
     const filteredPosts = allPosts.filter((post) => {
@@ -141,7 +121,7 @@ export async function getSearchResult(searchQuery: string) {
 
     return filteredPosts.filter((post) => post !== null) as PostData[];
   } catch (error) {
-    return [];
+    throw error;
   }
 }
 
@@ -150,16 +130,8 @@ export async function getSearchResult(searchQuery: string) {
  */
 export async function getSearchByTags(tag: string) {
   try {
-    const postsFiles = await getPostFiles();
-    const allPosts = await Promise.all(
-      postsFiles.map(async (postFile) => {
-        try {
-          return await getPostData(postFile);
-        } catch (error) {
-          return null;
-        }
-      })
-    );
+    const allPosts = await getAllPosts();
+
     const searchTag = tag.toLowerCase();
 
     const filteredPosts = allPosts.filter((post) => {
@@ -170,6 +142,6 @@ export async function getSearchByTags(tag: string) {
 
     return filteredPosts.filter((post) => post !== null) as PostData[];
   } catch (error) {
-    return [];
+    throw error;
   }
 }
