@@ -1,11 +1,11 @@
-import LiveEditor from "@/components/live-editor/live-editor";
+import MarkdownEditorWithPreview from "@/components/markdown-editor-with-preview/markdown-editor-with-preview";
 
 export default function WritePostPage() {
   return (
     <>
       <main>
         <article>
-          <LiveEditor />
+          <MarkdownEditorWithPreview />
         </article>
       </main>
     </>

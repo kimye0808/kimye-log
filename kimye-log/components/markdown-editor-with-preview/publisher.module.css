@@ -1,0 +1,44 @@
+/**
+* publisher
+*/
+.publisher {
+  position: fixed;
+  z-index: 3;
+  width: 854px;
+  bottom: 0;
+
+  box-shadow: var(--shadow-4);
+  background-color: var(--bg-frost-white);
+}
+
+.contents-wrapper {
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  width: 100%;
+  height: 5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.exit {
+  height: 4rem;
+  padding: 0.5rem 1rem;
+  align-items: center;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  outline: none;
+}
+
+.publish {
+  height: 4rem;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-6);
+}
+.publish:is(:hover, :focus-within) {
+  background-image: var(--gradient-1);
+}

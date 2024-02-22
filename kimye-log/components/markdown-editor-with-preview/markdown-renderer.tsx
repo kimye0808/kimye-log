@@ -1,5 +1,5 @@
 "use client";
-import classes from "./live-editor.module.css";
+import classes from "./markdown-editor-with-preview.module.css";
 import rehypeSanitize from "rehype-sanitize";
 import { useAppSelector } from "@/lib/hooks";
 import MDEditor from "@uiw/react-md-editor";
