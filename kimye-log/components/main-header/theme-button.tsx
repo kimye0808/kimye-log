@@ -16,12 +16,25 @@ export default function ThemeButton() {
   if (!mounted) {
     return null;
   }
+
+  /**
+   * theme provider + live-editor dark mode 지원
+   */
+  function toggleTheme() {
+    setTheme(theme === "dark" ? "light" : "dark");
+    if (theme === "dark") {
+      document.documentElement.setAttribute("data-color-mode", "light");
+    } else if (theme === "light") {
+      document.documentElement.setAttribute("data-color-mode", "dark");
+    }
+  }
+
+  /**
+   *  return
+   */
   return (
     <>
-      <button
-        className={classes.btn}
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      >
+      <button className={classes.btn} onClick={toggleTheme}>
         {theme === "dark" ? (
           <MdWbSunny color="orange" size={21} />
         ) : (
