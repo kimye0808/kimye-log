@@ -79,7 +79,7 @@ export default function NavBar() {
             className={`${classes["navbar-link"]} hover-3`}
             onClick={handleLinkClick}
           >
-            <NavLink href="/about">About</NavLink>
+            <NavLink href="/write">write</NavLink>
           </li>
         </ul>
 
