@@ -5,7 +5,7 @@
 .container {
   position: relative;
   background-color: var(--bg-frost-white);
-  color: var(--text-white);
+  color: var(--text-black);
   width: 100vw;
   height: calc(100vh - var(--section-padding));
   display: flex;
