@@ -95,3 +95,46 @@
   gap: 10px;
   font-weight: var(--weight-bold);
 }
+
+/**
+*  media queries
+*/
+@media (max-width: 575px) {
+  .publisher {
+    width: 100%;
+  }
+
+  .modal textarea {
+    padding-inline: 20px;
+  }
+}
+
+@media (min-width: 575px) {
+  .box {
+    width: 100%;
+  }
+  .modal textarea {
+    padding-inline: 20px;
+  }
+  .publisher {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .publisher {
+    width: 760px;
+  }
+}
+
+@media (min-width: 992px) {
+  .publisher {
+    width: 854px;
+  }
+}
+
+@media (min-width: 1500px) {
+  .toolbar-btn {
+    display: none;
+  }
+}

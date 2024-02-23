@@ -52,3 +52,13 @@
 .button:is(:hover, :focus-within) {
   background-image: var(--gradient-1);
 }
+
+/**
+*  media queries
+*/
+@media (max-width: 575px) {
+  .preview {
+    width: 90%;
+    min-width: 200px;
+  }
+}
