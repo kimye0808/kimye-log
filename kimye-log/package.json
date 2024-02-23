@@ -11,6 +11,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.0",
     "@types/react-syntax-highlighter": "^15.5.11",
+    "@uiw/react-md-editor": "^4.0.3",
     "gray-matter": "^4.0.3",
     "next": "14.1.0",
     "next-themes": "^0.2.1",
@@ -20,7 +21,8 @@
     "react-markdown": "^9.0.1",
     "react-md": "^5.1.6",
     "react-redux": "^9.1.0",
-    "react-syntax-highlighter": "^15.5.0"
+    "react-syntax-highlighter": "^15.5.0",
+    "rehype-sanitize": "^6.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",

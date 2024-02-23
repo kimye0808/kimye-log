@@ -1,0 +1,32 @@
+/**
+* markdown renderer 
+*/
+.box {
+  position: relative;
+  padding-block-start: calc(var(--section-padding) - 50px);
+  width: 0;
+  height: 100%;
+}
+
+/*md 파일 code 때문에*/
+.box span {
+  display: inline;
+}
+
+.wrapper {
+  padding-inline: 30px;
+}
+
+@media (min-width: 575px) {
+  .box {
+    width: 0;
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .box {
+    width: 50%;
+    display: block;
+  }
+}
