@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import logoImg from "@/assets/logo.png";
+import logoImg from "@/assets/logo_jh2.png";
 import classes from "./main-header.module.css";
 import NavBar from "./nav-bar";
 import MenuButton from "./menu-button";
@@ -18,7 +18,6 @@ export default function MainHeader() {
           </Link>
 
           <ThemeButton />
-
           <StoreProvider>
             <NavBar />
             <MenuButton />

@@ -19,7 +19,7 @@ export default async function Tags() {
           <ul className={`${classes["grid-list"]} grid-list`}>
             {allTags?.map((item) => (
               <li key={item.id}>
-                <Tag tagName={item.tag} />
+                <Tag keyVal={item.tag} tagName={item.tag} />
               </li>
             ))}
           </ul>
