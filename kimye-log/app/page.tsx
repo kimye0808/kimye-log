@@ -1,4 +1,3 @@
-import styles from "./page.module.css";
 import Hero from "@/components/hero/hero";
 import RecentPost from "@/components/recent-post/recent-post";
 import Tags from "@/components/tags/tags";

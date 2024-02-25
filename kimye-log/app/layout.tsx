@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
 import "./globals.css";
+import type { Metadata } from "next";
 import MainHeader from "@/components/main-header/main-header";
 import ThemeProviders from "./ThemeProvider";
+import SessionProviders from "./SessionProvider";
 
 export const metadata: Metadata = {
   title: "Kimye0808's blog",
@@ -21,10 +22,12 @@ export default function RootLayout({
       data-color-mode="light"
     >
       <body>
-        <ThemeProviders>
-          <MainHeader />
-          {children}
-        </ThemeProviders>
+        <SessionProviders>
+          <ThemeProviders>
+            <MainHeader />
+            {children}
+          </ThemeProviders>
+        </SessionProviders>
       </body>
     </html>
   );

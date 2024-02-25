@@ -9,17 +9,34 @@ import { toggle } from "@/lib/features/header/headerSlice";
 import { TfiMenu } from "react-icons/tfi";
 import logoImg from "@/assets/logo.png";
 import useDetectClose from "@/hooks/useDetectClose";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { signOut, useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 /**
  * 화면이 클때는 헤더에 잘 보이고 작아지면 버튼 클릭해야 보이는 navigationBar
  */
 export default function NavBar() {
-  //store에서 보여질지 말지 정보 받기
+  const [isKimye, setIsKimye] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
   const dispatch = useAppDispatch();
   const navbarVisible = useAppSelector((state: RootState) => {
     return state.header.navbarVisible;
   });
   const navbarRef = useRef(null);
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      setIsLogin(true);
+      if (session?.user?.name === "kimye0808") {
+        setIsKimye(true);
+      }
+    } else {
+      setIsLogin(false);
+      setIsKimye(false);
+    }
+  }, [session]);
 
   /**
    * toggle navbarVisible in redux store
@@ -75,12 +92,30 @@ export default function NavBar() {
           >
             <NavLink href="/posts">Posts</NavLink>
           </li>
-          <li
-            className={`${classes["navbar-link"]} hover-3`}
-            onClick={handleLinkClick}
-          >
-            <NavLink href="/write">write</NavLink>
-          </li>
+
+          {isKimye ? (
+            <li
+              className={`${classes["navbar-link"]} hover-3`}
+              onClick={handleLinkClick}
+            >
+              <NavLink href="/write">write</NavLink>
+            </li>
+          ) : null}
+          {!isLogin ? (
+            <li
+              className={`${classes["navbar-link"]} hover-3`}
+              onClick={handleLinkClick}
+            >
+              <NavLink href="/signin">signIn</NavLink>
+            </li>
+          ) : (
+            <button
+              className={classes["navbar-link"]}
+              onClick={() => signOut()}
+            >
+              signOut
+            </button>
+          )}
         </ul>
 
         <p className={classes["copyright-text"]}>
