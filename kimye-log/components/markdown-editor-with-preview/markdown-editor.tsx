@@ -2,7 +2,7 @@
 import classes from "./markdown-editor-with-preview.module.css";
 import MDEditor from "@uiw/react-md-editor";
 import rehypeSanitize from "rehype-sanitize";
-import { writeContents } from "@/lib/features/live-editor/writeSlice";
+import { setReduxContents } from "@/lib/features/live-editor/writeSlice";
 import { useAppDispatch } from "@/lib/hooks";
 
 export default function MarkdownEditor({ contents }: { contents: string }) {
@@ -19,7 +19,7 @@ export default function MarkdownEditor({ contents }: { contents: string }) {
         onChange={(
           value?: string,
           event?: React.ChangeEvent<HTMLTextAreaElement>
-        ) => dispatch(writeContents(value ?? ""))}
+        ) => dispatch(setReduxContents(value ?? ""))}
         preview="edit"
         previewOptions={{
           rehypePlugins: [[rehypeSanitize]],
