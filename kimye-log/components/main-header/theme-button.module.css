@@ -9,8 +9,9 @@
 *  media queries
 */
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   .btn {
     right: 16px;
+    z-index: 4;
   }
 }

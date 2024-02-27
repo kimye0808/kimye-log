@@ -16,7 +16,6 @@ export default function PostEditor() {
   const tags = useAppSelector((state) =>
     Array.isArray(state.write.tags) ? state.write.tags : []
   );
-  const contents = useAppSelector((state) => state.write.contents);
   const tagsArrayRef = useRef<HTMLDivElement>(null);
 
   /**
@@ -87,7 +86,7 @@ export default function PostEditor() {
           <TagGenerators addTag={addTag} />
         </div>
 
-        <MarkdownEditor contents={contents} />
+        <MarkdownEditor />
       </div>
     </article>
   );

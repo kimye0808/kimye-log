@@ -2,7 +2,7 @@
 import classes from "./markdown-renderer.module.css";
 import rehypeSanitize from "rehype-sanitize";
 import { useAppSelector } from "@/lib/hooks";
-import MDEditor from "@uiw/react-md-editor";
+import MarkdownEditor from "@uiw/react-markdown-editor";
 import { useEffect, useRef } from "react";
 
 export default function MarkdownRenderer() {
@@ -10,25 +10,30 @@ export default function MarkdownRenderer() {
   const contents = useAppSelector((state) => {
     return state.write.contents;
   });
+  const lastLine = useAppSelector((state) => {
+    return state.write.lastLine;
+  });
 
-  /**
-   *  글이 추가되면 자동으로 맨밑으로 스크롤한다
-   */
-  const scrollToBottom = () => {
-    autoScrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
   useEffect(() => {
-    scrollToBottom();
-  }, [contents]);
+    // 마지막 줄로 스크롤
+    if (autoScrollRef.current) {
+      autoScrollRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest",
+      });
+    }
+  }, [lastLine]); // contents가 변경될 때마다 스크롤
 
-  //for security against XSS
+  //security for XSS
   const rehypePlugins = [rehypeSanitize];
   return (
     <article className={classes.box}>
       <div className={classes.wrapper}>
-        <MDEditor.Markdown
+        <MarkdownEditor.Markdown
           source={contents}
           style={{ whiteSpace: "pre-wrap" }}
+          rehypePlugins={rehypePlugins}
         />
         <div ref={autoScrollRef}></div>
       </div>

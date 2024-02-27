@@ -1,8 +1,8 @@
 "use client";
 import classes from "./theme-button.module.css";
 import { useTheme } from "next-themes";
-import { MdWbSunny } from "react-icons/md";
-import { IoMoon } from "react-icons/io5";
+import { MdWbSunny } from "@react-icons/all-files/md/MdWbSunny";
+import { IoMoon } from "@react-icons/all-files/io5/IoMoon";
 import { useEffect, useState } from "react";
 
 export default function ThemeButton() {

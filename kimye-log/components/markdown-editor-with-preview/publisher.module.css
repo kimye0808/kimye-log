@@ -129,12 +129,18 @@
 
 @media (min-width: 992px) {
   .publisher {
-    width: 854px;
+    width: 800px;
   }
 }
 
 @media (min-width: 1500px) {
   .toolbar-btn {
     display: none;
+  }
+}
+
+@media (min-width: 1660px) {
+  .publisher {
+    width: 854px;
   }
 }

@@ -4,7 +4,7 @@ interface WriteState {
   title: string;
   tags: string[];
   contents: string;
-
+  lastLine: number;
   publishVisible: boolean;
 }
 
@@ -12,7 +12,7 @@ const initialState: WriteState = {
   title: "",
   tags: [],
   contents: "",
-
+  lastLine: 0,
   publishVisible: false,
 };
 
@@ -29,6 +29,9 @@ const writeSlice = createSlice({
     setReduxContents(state, action) {
       state.contents = action.payload;
     },
+    setReduxLineNumber(state, action) {
+      state.lastLine = action.payload;
+    },
 
     toggleVisible(state) {
       state.publishVisible = !state.publishVisible;
@@ -36,6 +39,11 @@ const writeSlice = createSlice({
   },
 });
 
-export const { setReduxTitle, setReduxTags, setReduxContents, toggleVisible } =
-  writeSlice.actions;
+export const {
+  setReduxTitle,
+  setReduxTags,
+  setReduxContents,
+  setReduxLineNumber,
+  toggleVisible,
+} = writeSlice.actions;
 export default writeSlice.reducer;

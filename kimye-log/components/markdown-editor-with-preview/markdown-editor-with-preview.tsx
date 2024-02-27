@@ -1,6 +1,5 @@
 import StoreProvider from "@/app/StoreProvider";
 import classes from "./markdown-editor-with-preview.module.css";
-
 import PostEditor from "./post-editor";
 import MarkdownRenderer from "./markdown-renderer";
 import Publisher from "./publisher";
