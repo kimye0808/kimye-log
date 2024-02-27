@@ -71,16 +71,6 @@ const searchSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(searchPostByInput.fulfilled, (state, action) => {
-      // const newPosts = action.payload.result;
-      // // 중복된 게시물을 확인하고 새로운 게시물만 추가
-      // newPosts.forEach((newPost: PostData) => {
-      //   const existingPostIndex = state.posts.findIndex(
-      //     (post) => post.slug === newPost.slug
-      //   );
-      //   if (existingPostIndex === -1) {
-      //     state.posts.push(newPost);
-      //   }
-      // });
       state.posts = action.payload.result;
       state.loading = "fulfilled";
     }),

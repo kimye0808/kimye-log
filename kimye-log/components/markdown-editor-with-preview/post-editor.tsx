@@ -23,26 +23,21 @@ export default function PostEditor() {
    */
   function addTag(tag: string) {
     if (!tags.includes(tag) && tag.trim() !== "") {
-      dispatch(setReduxTags((prevTags: string[]) => [...prevTags, tag]));
+      const newTags = [...tags, tag];
+      dispatch(setReduxTags(newTags));
       addTagElement(tag);
     }
   }
   function deleteTag(tag: string) {
     const isInclude = tags.includes(tag);
-    dispatch(
-      setReduxTags((prevTags: string[]) => {
-        if (!isInclude) {
-          return prevTags;
-        }
-        const newTags = prevTags.filter((item) => {
-          return item !== tag;
-        });
-        return newTags;
-      })
-    );
+    let newTags: string[];
     if (!isInclude) {
+      newTags = tags;
       deleteTagElement(tag);
+    } else {
+      newTags = tags.filter((item) => item !== tag);
     }
+    dispatch(setReduxTags(newTags));
   }
   /**
    *  tags array DOM element를  추가하거나 제거한다
@@ -73,21 +68,23 @@ export default function PostEditor() {
    *  return
    */
   return (
-    <article className={classes.box}>
-      <div className={classes.wrapper}>
-        <textarea
-          className={classes.title}
-          placeholder="제목"
-          value={title}
-          onChange={(event) => dispatch(setReduxTitle(event.target.value))}
-          maxLength={150}
-        />
-        <div ref={tagsArrayRef} className={classes["tags-array"]}>
-          <TagGenerators addTag={addTag} />
-        </div>
+    <>
+      <article className={classes.box}>
+        <div className={classes.wrapper}>
+          <textarea
+            className={classes.title}
+            placeholder="제목"
+            value={title}
+            onChange={(event) => dispatch(setReduxTitle(event.target.value))}
+            maxLength={150}
+          />
+          <div ref={tagsArrayRef} className={classes["tags-array"]}>
+            <TagGenerators addTag={addTag} />
+          </div>
 
-        <MarkdownEditor />
-      </div>
-    </article>
+          <MarkdownEditor />
+        </div>
+      </article>
+    </>
   );
 }
