@@ -115,7 +115,7 @@
   /** Gradient colors */
   --gradient-1: linear-gradient(90deg, #9bcf53, #d1dd00 99%);
   --gradient-2: linear-gradient(90deg, #03c75a, #9bcf53 1%);
-  --gradient-3: linear-gradient(0deg, #000d1a, transparent); /*ddddddddddddddd*/
+  --gradient-3: linear-gradient(90deg, #cccccc, #cccccc);
 
   /** Border colors */
   --border-white: hsl(0, 0%, 100%); /*ddddddddddddddd*/
@@ -379,6 +379,7 @@ body.nav-active {
 .error button:is(:hover, :focus-within) {
   background-image: var(--gradient-1);
 }
+
 /**
 *   media queries
 */

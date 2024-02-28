@@ -43,6 +43,10 @@
 .publish:is(:hover, :focus-within) {
   background-image: var(--gradient-1);
 }
+.publish:disabled {
+  background-image: none;
+  background-color: var(--bg-light-gray);
+}
 
 /**
 *   publisher modal

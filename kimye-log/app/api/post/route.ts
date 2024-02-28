@@ -2,6 +2,7 @@ import { type NextRequest } from "next/server";
 import { MongoClient } from "mongodb";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
+import { isValidDateFormat } from "@/utils/formatDate";
 /**
  *  /api/post
  */
@@ -24,12 +25,14 @@ export async function POST(request: NextRequest) {
   const contents = formData.get("contents");
   const thumbnail = formData.get("thumbnail"); //추후에 따로 처리
   const summary = formData.get("summary");
+  const date = formData.get("date");
 
   if (
     !title ||
     String(title).trim() === "" ||
     !contents ||
-    String(contents).trim() === ""
+    String(contents).trim() === "" ||
+    !isValidDateFormat(String(date))
   ) {
     return new Response(JSON.stringify({ message: "Invalid input" }), {
       status: 422,
@@ -44,6 +47,7 @@ export async function POST(request: NextRequest) {
     tags,
     contents,
     summary,
+    date,
   };
 
   //db에 connect

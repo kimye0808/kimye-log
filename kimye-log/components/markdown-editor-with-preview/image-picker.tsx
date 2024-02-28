@@ -6,11 +6,9 @@ import Image from "next/image";
 export default function ImagePicker({
   pickedImage,
   handleImage,
-  disabled,
 }: {
   pickedImage: string | null;
   handleImage: (item: string | null) => void;
-  disabled: boolean;
 }) {
   const imageInputRef = useRef<HTMLInputElement>(null);
 
@@ -59,7 +57,6 @@ export default function ImagePicker({
         name={"thumbnail"}
         ref={imageInputRef}
         onChange={handleImageChange}
-        disabled={disabled}
       />
     </div>
   );

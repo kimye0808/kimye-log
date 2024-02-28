@@ -5,58 +5,92 @@ import { toggleVisible } from "@/lib/features/live-editor/writeSlice";
 import ImagePicker from "./image-picker";
 import { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
+import { toastNotification } from "@/utils/notification";
+import { makeSummary } from "@/utils/makeSummary";
+import { useRouter } from "next/navigation";
+import { formatDate } from "@/utils/formatDate";
 
-export default function PublisherModal() {
+/**
+ *  Submit Buttons
+ */
+function Submit() {
+  const dispatch = useAppDispatch();
   const status = useFormStatus();
 
+  return (
+    <div className={classes["button-wrapper"]}>
+      <button
+        type="button"
+        className={`${classes.exit} hover-2`}
+        onClick={() => dispatch(toggleVisible())}
+        disabled={status.pending}
+      >
+        뒤로가기
+      </button>
+
+      <button
+        className={`${classes.publish} btn btn-secondary`}
+        disabled={status.pending}
+      >
+        {status.pending ? "Loading" : "Submit"}
+      </button>
+    </div>
+  );
+}
+
+/**
+ *  publisher에서 publish 클릭시 나오는 창
+ */
+export default function PublisherModal() {
+  const router = useRouter();
   const [pickedImage, setPickedImage] = useState<string | null>(null);
   const [summary, setSummary] = useState<string>("");
 
-  const dispatch = useAppDispatch();
   const title = useAppSelector((state) => state.write.title);
   const tags = useAppSelector((state) => state.write.tags);
   const contents = useAppSelector((state) => state.write.contents);
   const isVisible = useAppSelector((state) => state.write.publishVisible);
 
+  const toastifyInfo = () =>
+    toastNotification("Attempting to submit...", "info");
+  const toastifyError = () => toastNotification("Failed to submit!", "error");
+  const toastifySuccess = () =>
+    toastNotification("Submitted successfully!", "success");
+  const toastifyWarning = (message: string) =>
+    toastNotification("reasons : ", "warning", message);
+
   /**
    *  본문에서 150자 자동으로 summary 설정
    */
   useEffect(() => {
-    let pureText = contents.replace(/```[^```]*```/g, "");
-    pureText = pureText.replace(/`[^`]*`/g, "");
-    pureText = pureText.replace(/\[.*?\]\(.*?\)/g, "");
-    pureText = pureText.replace(/^>\s+.+/gm, "");
-    pureText = pureText.replace(/^\d+\.\s+.+/gm, "");
-    pureText = pureText.replace(/^- \[ \].+/gm, "");
-    pureText = pureText.replace(/^- \[x\].+/gm, "");
-    pureText = pureText.replace(/^\|.*?\|$/gm, "");
-    pureText = pureText.replace(/^#+\s+.+/gm, "");
-    pureText = pureText.replace(/!\[.*?\]\(.*?\)/g, "");
-    pureText = pureText.replace(/\*\*[^*]*\*\*/g, "");
-    pureText = pureText.replace(/\*[^*]*\*/g, "");
-    pureText = pureText.replace(/~~[^~]*~~/g, "");
-    pureText = pureText.trim();
-    setSummary(pureText.substring(0, 150));
+    setSummary(makeSummary(contents));
   }, [contents]);
 
   /**
    *  handle submit form
    */
   async function handleSubmit(formData: FormData) {
+    let date = formatDate(new Date());
     formData.append("title", title);
     formData.append("tags", JSON.stringify(tags));
     formData.append("contents", contents);
+    formData.append("date", date);
 
     try {
       const response = await fetch("/api/post", {
         method: "POST",
         body: formData,
       });
+
       if (!response.ok) {
+        toastifyError();
         const responseData = await response.json();
+        toastifyWarning(responseData?.message);
         throw new Error(`${responseData?.message}`);
       }
-      console.log("Post submitted successfully!");
+
+      toastifySuccess();
+      router.push("/posts");
     } catch (error) {
       console.error("Error submitting post:", error);
     }
@@ -73,7 +107,6 @@ export default function PublisherModal() {
               <ImagePicker
                 pickedImage={pickedImage}
                 handleImage={(item: string | null) => setPickedImage(item)}
-                disabled={status.pending}
               />
 
               <div className={classes.summary}>
@@ -83,27 +116,10 @@ export default function PublisherModal() {
                   maxLength={150}
                   onChange={(event) => setSummary(event.target.value)}
                   name="summary"
-                  disabled={status.pending}
                 />
               </div>
 
-              <div className={classes["button-wrapper"]}>
-                <button
-                  type="button"
-                  className={`${classes.exit} hover-2`}
-                  onClick={() => dispatch(toggleVisible())}
-                  disabled={status.pending}
-                >
-                  뒤로가기
-                </button>
-
-                <button
-                  className={`${classes.publish} btn btn-secondary`}
-                  disabled={status.pending}
-                >
-                  {status.pending ? "Submitting..." : "Submit"}
-                </button>
-              </div>
+              <Submit />
             </div>
           </section>
         </form>
