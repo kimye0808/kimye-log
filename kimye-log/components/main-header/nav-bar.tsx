@@ -11,8 +11,6 @@ import logoImg from "@/assets/logo.png";
 import useDetectClose from "@/hooks/useDetectClose";
 import { useEffect, useRef, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
 /**
  * 화면이 클때는 헤더에 잘 보이고 작아지면 버튼 클릭해야 보이는 navigationBar
  */

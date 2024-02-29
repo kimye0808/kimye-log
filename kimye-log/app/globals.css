@@ -380,6 +380,12 @@ body.nav-active {
   background-image: var(--gradient-1);
 }
 
+.wmde-markdown img {
+  display: block !important;
+  margin: 3rem auto !important;
+  max-width: 100% !important;
+}
+
 /**
 *   media queries
 */

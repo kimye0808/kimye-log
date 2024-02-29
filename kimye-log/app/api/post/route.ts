@@ -2,7 +2,7 @@ import { type NextRequest } from "next/server";
 import { MongoClient } from "mongodb";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
-import { isValidDateFormat } from "@/utils/formatDate";
+import { isValidDateFormat } from "@/utils/format-file";
 /**
  *  /api/post
  */

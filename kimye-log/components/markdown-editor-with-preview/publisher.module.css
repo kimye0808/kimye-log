@@ -33,6 +33,9 @@
   display: flex;
   outline: none;
 }
+.exit:disabled {
+  cursor: not-allowed;
+}
 
 .publish {
   height: 4rem;
@@ -44,6 +47,7 @@
   background-image: var(--gradient-1);
 }
 .publish:disabled {
+  cursor: not-allowed;
   background-image: none;
   background-color: var(--bg-light-gray);
 }

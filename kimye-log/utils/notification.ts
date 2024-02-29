@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 type ToastType = "info" | "error" | "warning" | "success";
 
 const toastColors = {
-  info: "#3498db",
+  info: "#0000FF",
   error: "#FA5858",
   warning: "#f39c12",
   success: "#2ecc71",
@@ -20,7 +20,7 @@ export const toastNotification = (
   }
   toast[type](msg, {
     position: "bottom-right",
-    autoClose: 2000,
+    autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
