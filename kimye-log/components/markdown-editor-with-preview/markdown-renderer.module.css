@@ -7,6 +7,12 @@
   width: 0;
   height: 100%;
 }
+.box ol li {
+  list-style-type: decimal;
+}
+.box ul li {
+  list-style-type: disc;
+}
 
 /*md 파일 code 때문에*/
 .box span {

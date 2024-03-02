@@ -142,7 +142,7 @@ export default function MarkdownRenderer() {
   // const rehypePlugins = [rehypeSanitize];
 
   return (
-    <div className={classes.box}>
+    <article className={classes.box}>
       <div className={classes.wrapper}>
         <AutoSizer>
           {({ width, height }) => (
@@ -161,6 +161,6 @@ export default function MarkdownRenderer() {
 
         <div ref={autoScrollRef}></div>
       </div>
-    </div>
+    </article>
   );
 }

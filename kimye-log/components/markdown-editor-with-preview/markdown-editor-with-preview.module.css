@@ -94,6 +94,13 @@
   padding-bottom: 50px;
 }
 
+.contents ol li {
+  list-style-type: decimal;
+}
+.contents ul li {
+  list-style-type: disc;
+}
+
 /**
 *  media queries
 */
