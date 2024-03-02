@@ -1,12 +1,11 @@
 "use client";
 import classes from "./markdown-renderer.module.css";
-import rehypeSanitize from "rehype-sanitize";
+// import rehypeSanitize from "rehype-sanitize";
 import { useAppSelector } from "@/lib/hooks";
 import MarkdownEditor from "@uiw/react-markdown-editor";
 import { useEffect, useRef, useState } from "react";
 import "react-virtualized/styles.css";
 import {
-  WindowScroller,
   CellMeasurer,
   CellMeasurerCache,
   AutoSizer,
@@ -33,11 +32,13 @@ export default function MarkdownRenderer() {
         inline: "nearest",
       });
     }
-  }, [lastLine]); // contents가 변경될 때마다 스크롤
+  }, [lastLine]);
 
+  /**
+   *  contents를 markdown blocks로 parsing한다. code 블록에 초점을 맞춘다.
+   */
   const [parsedContents, setParsedContents] = useState([""]);
   useEffect(() => {
-    // Markdown 내용을 파싱하여 블록으로 분할
     setParsedContents(parseMarkdown(contents));
   }, [contents]);
 
@@ -45,23 +46,24 @@ export default function MarkdownRenderer() {
     const blocks: string[] = [];
     let isCodeBlock = false;
     let currentBlock = "";
-    let currentLanguage = "";
+    let currentCodeLanguage = "";
     const lines = markdown.split("\n");
     lines.forEach((line) => {
       if (line.startsWith("```")) {
         if (isCodeBlock) {
-          blocks.push("```" + currentLanguage + "\n" + currentBlock + "```\n");
+          blocks.push(
+            "```" + currentCodeLanguage + "\n" + currentBlock + "```\n"
+          );
           currentBlock = "";
-          currentLanguage = "";
+          currentCodeLanguage = "";
         } else {
           if (currentBlock) {
             blocks.push(currentBlock);
             currentBlock = "";
           }
-          // 코드 블록이 열릴 때 언어 태그 파싱
           const languageMatch = line.match(/^```(.*)/);
           if (languageMatch && languageMatch[1]) {
-            currentLanguage = languageMatch[1];
+            currentCodeLanguage = languageMatch[1];
           }
         }
         isCodeBlock = !isCodeBlock;
@@ -81,15 +83,63 @@ export default function MarkdownRenderer() {
     return blocks;
   };
 
-  //security for XSS
-  const rehypePlugins = [rehypeSanitize];
-
-  console.log(parsedContents);
-  //cache for preventing large re-redering
+  //cache for preventing large re-redering 무분별한 사이즈 재측정 방지
   const cache = new CellMeasurerCache({
     defaultWidth: 100,
     fixedWidth: true,
   });
+  /**
+   *  범위로 정해진 부분만 보여주고 virtualized
+   *  row 줄 하나
+   *  parsedContents 블록 단위로 자동으로 사이즈 측정해서 Markdown Preview로 보냄
+   *  이미지는 로드되면 다시 사이즈 측정
+   */
+  const renderRow = ({ index, key, parent, style }: ListRowProps) => {
+    return (
+      <CellMeasurer
+        cache={cache}
+        parent={parent}
+        key={key}
+        columnIndex={0}
+        rowIndex={index}
+      >
+        {({ registerChild, measure }) => {
+          const isImage = /!\[.*\]\(.*\)/.test(parsedContents[index]);
+          return (
+            <div
+              style={style}
+              ref={(element): void => {
+                if (element && registerChild) {
+                  return registerChild(element);
+                }
+              }}
+            >
+              {parsedContents[index] !== "\n" ? (
+                isImage ? (
+                  <div onLoad={measure}>
+                    <MarkdownEditor.Markdown
+                      source={parsedContents[index]}
+                      // rehypePlugins={rehypePlugins}
+                    />
+                  </div>
+                ) : (
+                  <MarkdownEditor.Markdown
+                    source={parsedContents[index]}
+                    // rehypePlugins={rehypePlugins}
+                  />
+                )
+              ) : (
+                <div>&nbsp;</div>
+              )}
+            </div>
+          );
+        }}
+      </CellMeasurer>
+    );
+  };
+
+  //security for XSS <- code highlighting error
+  // const rehypePlugins = [rehypeSanitize];
 
   return (
     <div className={classes.box}>
@@ -104,53 +154,7 @@ export default function MarkdownRenderer() {
               overscanRowCount={3}
               rowHeight={cache.rowHeight}
               deferredMeasurementCache={cache}
-              rowRenderer={({ index, key, parent, style }: ListRowProps) => {
-                return (
-                  <CellMeasurer
-                    cache={cache}
-                    parent={parent}
-                    key={key}
-                    columnIndex={0}
-                    rowIndex={index}
-                  >
-                    {({ registerChild, measure }) => {
-                      // 이미지를 정규표현식으로 탐지
-                      const isImage = /!\[.*\]\(.*\)/.test(
-                        parsedContents[index]
-                      );
-                      return (
-                        <div
-                          style={style}
-                          ref={(element): void => {
-                            if (element && registerChild) {
-                              return registerChild(element);
-                            }
-                          }}
-                        >
-                          {/* 이미지인 경우에만 measure 이벤트 추가 */}
-                          {parsedContents[index] !== "\n" ? (
-                            isImage ? (
-                              <div onLoad={measure}>
-                                <MarkdownEditor.Markdown
-                                  source={parsedContents[index]}
-                                  rehypePlugins={rehypePlugins}
-                                />
-                              </div>
-                            ) : (
-                              <MarkdownEditor.Markdown
-                                source={parsedContents[index]}
-                                rehypePlugins={rehypePlugins}
-                              />
-                            )
-                          ) : (
-                            <div>&nbsp;</div>
-                          )}
-                        </div>
-                      );
-                    }}
-                  </CellMeasurer>
-                );
-              }}
+              rowRenderer={renderRow}
             />
           )}
         </AutoSizer>
