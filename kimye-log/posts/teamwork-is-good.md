@@ -12,6 +12,14 @@ For example, you should understand code like this:
 
 이것도` 예시이것도` 자연스럽게
 
+1. sdfsdf
+2. fff
+3. ordrered List
+
+- sdfkjsdklf
+- sdkjflksdjfklds
+- dsd
+
 ```js
 const basics = 'Okay, that should not be too difficult actually';
 

@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import classes from "./publisher.module.css";
-import { IoMdArrowRoundBack } from "react-icons/io";
+import { IoMdArrowRoundBack } from "@react-icons/all-files/io/IoMdArrowRoundBack";
 import { useAppDispatch } from "@/lib/hooks";
 import { toggleVisible } from "@/lib/features/live-editor/writeSlice";
 

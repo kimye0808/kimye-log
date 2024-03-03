@@ -1,9 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import classes from "./search-tags.module.css";
-import { FiSearch } from "react-icons/fi";
-import { Link } from "react-md";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { FiSearch } from "@react-icons/all-files/fi/FiSearch";
+import { useRouter } from "next/navigation";
+import { debounce } from "lodash";
 
 export default function SearchBar() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -12,15 +12,23 @@ export default function SearchBar() {
   /**
    * input change handler
    */
+  const throttleInputChange = useMemo(
+    () =>
+      debounce((event) => router.push(`/posts?q=${event.target.value}`), 300),
+    [router]
+  );
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setSearchQuery(event.target.value);
     if (event.target.value.trim() === "") {
       router.push("/posts");
     } else {
-      router.push(`/posts?q=${event.target.value}`);
+      throttleInputChange(event);
     }
   }
 
+  /**
+   * return
+   */
   return (
     <>
       <div className={classes["search-bar"]}>

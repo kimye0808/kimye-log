@@ -1,7 +1,12 @@
 .section {
   padding-block: calc(var(--section-padding) - 50px);
 }
-
+.section ol li {
+  list-style-type: decimal;
+}
+.section ul li {
+  list-style-type: disc;
+}
 .image {
   width: 100%;
   height: auto;

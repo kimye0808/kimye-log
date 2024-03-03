@@ -1,6 +1,5 @@
 import classes from "./card.module.css";
 import Image, { StaticImageData } from "next/image";
-import { IoMdTime } from "react-icons/io";
 
 interface PropsType {
   summary: string;

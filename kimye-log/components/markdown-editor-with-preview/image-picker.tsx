@@ -3,14 +3,18 @@ import classes from "./image-picker.module.css";
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 
-export default function ImagePicker() {
-  const [pickedImage, setPickedImage] = useState<any>(null);
+export default function ImagePicker({
+  pickedImage,
+  handleImage,
+}: {
+  pickedImage: string | null;
+  handleImage: (item: string | null) => void;
+}) {
   const imageInputRef = useRef<HTMLInputElement>(null);
 
   function handlePickClick() {
     imageInputRef.current?.click();
   }
-
   /**
    *  이미지 파일 읽고 dataurl로 변환 후 set
    */
@@ -18,19 +22,19 @@ export default function ImagePicker() {
     const file = event.target.files?.[0];
 
     if (!file) {
-      setPickedImage(null);
+      handleImage(null);
       return;
     }
     const fileReader = new FileReader();
     fileReader.onload = () => {
-      setPickedImage(fileReader.result);
+      handleImage(fileReader.result as string);
     };
     fileReader.readAsDataURL(file);
   }
 
   return (
     <div className={classes.picker}>
-      <label htmlFor={"임시"}>포스트 미리보기</label>
+      <label htmlFor={"thumbnail"}>포스트 미리보기</label>
 
       <div className={classes.preview}>
         {!pickedImage && <p>No image picked yet</p>}
@@ -48,12 +52,11 @@ export default function ImagePicker() {
       <input
         className={classes.input}
         type="file"
-        id={"임시"}
+        id={"thumbnail"}
         accept="image/png, image/jpeg"
-        name={"임시"}
+        name={"thumbnail"}
         ref={imageInputRef}
         onChange={handleImageChange}
-        required //이미지 선택시에만 제출 가능
       />
     </div>
   );

@@ -1,7 +1,7 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
 import classes from "./singin.module.css";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
 import { redirect } from "next/navigation";
 import { useEffect } from "react";
 // import { useRouter } from "next/navigation";

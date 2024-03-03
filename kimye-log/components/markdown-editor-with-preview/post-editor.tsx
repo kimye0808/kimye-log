@@ -1,43 +1,43 @@
 "use client";
 import classes from "./markdown-editor-with-preview.module.css";
-import { useAppSelector } from "@/lib/hooks";
-import { useRef, useState } from "react";
-
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useEffect, useRef, useState } from "react";
+import {
+  setReduxTitle,
+  setReduxTags,
+  setReduxContents,
+} from "@/lib/features/live-editor/writeSlice";
 import MarkdownEditor from "./markdown-editor";
 import TagGenerators from "./tag-generator";
 
 export default function PostEditor() {
-  const [title, setTitle] = useState<string>("");
-  const [tags, setTags] = useState<string[]>([]);
+  const dispatch = useAppDispatch();
+  const title = useAppSelector((state) => state.write.title);
+  const tags = useAppSelector((state) =>
+    Array.isArray(state.write.tags) ? state.write.tags : []
+  );
   const tagsArrayRef = useRef<HTMLDivElement>(null);
-
-  const contents = useAppSelector((state) => {
-    return state.write.contents;
-  });
 
   /**
    *  tags 배열에 추가하거나 제거한다
    */
   function addTag(tag: string) {
     if (!tags.includes(tag) && tag.trim() !== "") {
-      setTags((prevTags) => [...prevTags, tag]);
+      const newTags = [...tags, tag];
+      dispatch(setReduxTags(newTags));
       addTagElement(tag);
     }
   }
   function deleteTag(tag: string) {
     const isInclude = tags.includes(tag);
-    setTags((prevTags) => {
-      if (!isInclude) {
-        return prevTags;
-      }
-      const newTags = prevTags.filter((item) => {
-        return item !== tag;
-      });
-      return newTags;
-    });
+    let newTags: string[];
     if (!isInclude) {
+      newTags = tags;
       deleteTagElement(tag);
+    } else {
+      newTags = tags.filter((item) => item !== tag);
     }
+    dispatch(setReduxTags(newTags));
   }
   /**
    *  tags array DOM element를  추가하거나 제거한다
@@ -68,21 +68,23 @@ export default function PostEditor() {
    *  return
    */
   return (
-    <article className={classes.box}>
-      <div className={classes.wrapper}>
-        <textarea
-          className={classes.title}
-          placeholder="제목"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
-          maxLength={150}
-        />
-        <div ref={tagsArrayRef} className={classes["tags-array"]}>
-          <TagGenerators addTag={addTag} />
-        </div>
+    <>
+      <article className={classes.box}>
+        <div className={classes.wrapper}>
+          <textarea
+            className={classes.title}
+            placeholder="제목"
+            value={title}
+            onChange={(event) => dispatch(setReduxTitle(event.target.value))}
+            maxLength={150}
+          />
+          <div ref={tagsArrayRef} className={classes["tags-array"]}>
+            <TagGenerators addTag={addTag} />
+          </div>
 
-        <MarkdownEditor contents={contents} />
-      </div>
-    </article>
+          <MarkdownEditor />
+        </div>
+      </article>
+    </>
   );
 }
