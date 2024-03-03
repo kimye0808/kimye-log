@@ -2,7 +2,7 @@
 import classes from "./markdown-editor-with-preview.module.css";
 import {
   setReduxContents,
-  setReduxLineNumber,
+  // setReduxLineNumber,
 } from "@/lib/features/live-editor/writeSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { throttle } from "lodash";
@@ -101,21 +101,21 @@ export default function Editor() {
     };
   }, [images, isContentsChanged, pathName, router]);
 
-  /**
-   *  마지막 라인의 숫자를 알아낸다
-   */
-  const throttleLineChange = useMemo(
-    () =>
-      throttle((lineno: number) => dispatch(setReduxLineNumber(lineno)), 1000),
-    [dispatch]
-  );
-  useEffect(() => {
-    // 내용이 바뀔 때마다 맨 마지막 cm-line 요소의 인덱스를 업데이트
-    const cmLineElements = document.querySelectorAll(".cm-line");
-    if (cmLineElements.length > 0) {
-      throttleLineChange(cmLineElements.length - 1);
-    }
-  }, [contents, throttleLineChange]);
+  // /**
+  //  *  마지막 라인의 숫자를 알아낸다
+  //  */
+  // const throttleLineChange = useMemo(
+  //   () =>
+  //     throttle((lineno: number) => dispatch(setReduxLineNumber(lineno)), 1000),
+  //   [dispatch]
+  // );
+  // useEffect(() => {
+  //   // 내용이 바뀔 때마다 맨 마지막 cm-line 요소의 인덱스를 업데이트
+  //   const cmLineElements = document.querySelectorAll(".cm-line");
+  //   if (cmLineElements.length > 0) {
+  //     throttleLineChange(cmLineElements.length - 1);
+  //   }
+  // }, [contents, throttleLineChange]);
 
   /**
    *  contents를 업데이트하고 redux의 contents는 throttle한다

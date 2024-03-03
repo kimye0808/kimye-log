@@ -15,32 +15,47 @@ import {
 
 export default function MarkdownRenderer() {
   const listRef = useRef<List | null>(null);
-  const autoScrollRef = useRef<HTMLDivElement>(null);
   const contents = useAppSelector((state) => {
     return state.write.contents;
   });
-  const lastLine = useAppSelector((state) => {
-    return state.write.lastLine;
-  });
-
-  useEffect(() => {
-    // 마지막 줄로 스크롤
-    if (autoScrollRef.current) {
-      autoScrollRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "end",
-        inline: "nearest",
-      });
-    }
-  }, [lastLine]);
 
   /**
    *  contents를 markdown blocks로 parsing한다. code 블록에 초점을 맞춘다.
+   *  prevParsedContents는 변경 전 parsedContents, 변경 index 체크용도
+   *  isChanged는 onRowsRendered가 수시로 일어나는 것 방지용도
+   *   ->내용 입력하지 않을때도 scroll이 가능하도록
    */
   const [parsedContents, setParsedContents] = useState([""]);
+  const [prevParsedContents, setPrevParsedContents] = useState([""]);
+  const [isChanged, setIsChanged] = useState(false);
   useEffect(() => {
-    setParsedContents(parseMarkdown(contents));
+    const newParsedContents = parseMarkdown(contents);
+    setParsedContents((prevParsedContent) => {
+      if (prevParsedContent.join("") !== newParsedContents.join("")) {
+        setIsChanged(true);
+
+        setPrevParsedContents(prevParsedContent);
+        return newParsedContents;
+      } else {
+        setIsChanged(false);
+        return prevParsedContent;
+      }
+    });
   }, [contents]);
+  useEffect(() => {
+    let timer: number;
+    if (isChanged) {
+      timer = window.setTimeout(() => {
+        setIsChanged((prev) => !prev);
+      }, 1000);
+    }
+
+    return () => {
+      if (timer) {
+        window.clearTimeout(timer);
+      }
+    };
+  }, [isChanged]);
 
   const parseMarkdown = (markdown: string) => {
     const blocks: string[] = [];
@@ -129,7 +144,7 @@ export default function MarkdownRenderer() {
                   />
                 )
               ) : (
-                <div>&nbsp;</div>
+                <MarkdownEditor.Markdown source={"&nbsp;"} />
               )}
             </div>
           );
@@ -137,6 +152,23 @@ export default function MarkdownRenderer() {
       </CellMeasurer>
     );
   };
+
+  /**
+   *  계속 화면에 render되는 시작 index와 끝 index 기반
+   *   화면에 안보이면 scroll
+   */
+  function onRowsRendered(startIndex: number, stopIndex: number) {
+    if (!isChanged) return;
+    if (listRef.current) {
+      let changedIndex = parsedContents.findIndex(
+        (content, index) => content !== prevParsedContents[index]
+      );
+      if (changedIndex !== -1) {
+        if (!(changedIndex >= startIndex && changedIndex <= stopIndex))
+          listRef.current.scrollToRow(changedIndex);
+      }
+    }
+  }
 
   //security for XSS <- code highlighting error
   // const rehypePlugins = [rehypeSanitize];
@@ -155,11 +187,12 @@ export default function MarkdownRenderer() {
               rowHeight={cache.rowHeight}
               deferredMeasurementCache={cache}
               rowRenderer={renderRow}
+              onRowsRendered={({ startIndex, stopIndex }) => {
+                onRowsRendered(startIndex, stopIndex);
+              }}
             />
           )}
         </AutoSizer>
-
-        <div ref={autoScrollRef}></div>
       </div>
     </article>
   );
