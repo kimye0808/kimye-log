@@ -7,13 +7,11 @@ import {
 } from "@/lib/features/live-editor/writeSlice";
 import ImagePicker from "./image-picker";
 import { useEffect, useState } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 import { toastNotification } from "@/utils/notification";
 import { makeSummary } from "@/utils/make-summary";
 import { useRouter } from "next/navigation";
 import { formatDate } from "@/utils/format-file";
-import { storage } from "@/firebase/firebase";
-import { deleteObject, ref } from "firebase/storage";
 import {
   deleteImageFromStorage,
   getImagePath,
@@ -71,6 +69,13 @@ export default function PublisherModal() {
   const toastifyWarning = (message: string) =>
     toastNotification("reasons : ", "warning", message);
 
+  useEffect(() => {
+    if (isVisible) {
+      if (title === "" || contents === "") {
+        toastNotification("The title or content is empty", "error");
+      }
+    }
+  }, [isVisible, contents, title]);
   /**
    *  본문에서 150자 자동으로 summary 설정, 150자가 되면 useEffect 중지
    */
