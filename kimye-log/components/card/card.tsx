@@ -3,26 +3,13 @@ import Image from "next/image";
 import { StaticImageData } from "next/image";
 
 interface PropsType {
-  slug: string;
   postImg: string;
   tags: string[] | null;
-  readingTime: number;
   title: string;
-  userImg: StaticImageData | string;
-  name: string;
   date: string;
 }
 
-export default function Card({
-  slug,
-  postImg,
-  tags,
-  readingTime,
-  title,
-  userImg,
-  name,
-  date,
-}: PropsType) {
+export default function Card({ postImg, tags, title, date }: PropsType) {
   return (
     <>
       <div className={`${classes["recent-card"]} card`}>
@@ -34,6 +21,7 @@ export default function Card({
               width={300}
               height={100}
               className={`${classes} img-cover`}
+              priority
             />
           )}
         </figure>

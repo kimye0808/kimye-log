@@ -52,11 +52,12 @@ function Submit() {
 export default function PublisherModal() {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const [pickedImage, setPickedImage] = useState<string | null>(null);
+  const [pickedImage, setPickedImage] = useState<string | null>(null); //미리보기용도
   const [summary, setSummary] = useState<string>("");
 
   const title = useAppSelector((state) => state.write.title);
   const tags = useAppSelector((state) => state.write.tags);
+  const thumbnail = useAppSelector((state) => state.write.thumbnail);
   const contents = useAppSelector((state) => state.write.contents);
   const isVisible = useAppSelector((state) => state.write.publishVisible);
   const images = useAppSelector((state) => state.write.images);
@@ -133,6 +134,7 @@ export default function PublisherModal() {
     let date = formatDate(new Date());
     formData.append("title", title);
     formData.append("tags", JSON.stringify(tags));
+    formData.append("thumbnail", thumbnail || "");
     formData.append("contents", contents);
     formData.append("date", date);
 

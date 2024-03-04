@@ -1,11 +1,12 @@
 import { type NextRequest } from "next/server";
-import { MongoClient } from "mongodb";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { formatFilePath, isValidDateFormat } from "@/utils/format-file";
 import { storage } from "@/firebase/firebase";
 import { ref, uploadBytes } from "firebase/storage";
 import { deleteImageFromStorage } from "@/utils/storage-util";
+import { connectToDatabase } from "@/utils/connect-db";
+import { Db, MongoClient } from "mongodb";
 /**
  *  /api/post
  */
@@ -45,11 +46,12 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  //db에 connect
   let client: MongoClient;
-  const connectionString = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_CLUSTERNAME}.7z6drok.mongodb.net/`;
+  let db: Db | Response;
   try {
-    client = await MongoClient.connect(connectionString);
+    const connection = await connectToDatabase();
+    client = connection.client;
+    db = connection.db;
   } catch (error) {
     return new Response(
       JSON.stringify({ message: "Cannot connect to database" }),
@@ -61,14 +63,14 @@ export async function POST(request: NextRequest) {
       }
     );
   }
-  const db = client.db();
 
   // 썸네일을 올린다
   let formatPath: string = "";
-  if (thumbnail instanceof File) {
+  if (thumbnail !== "" && thumbnail instanceof File) {
     formatPath = formatFilePath(thumbnail?.name);
     const fileRef = ref(storage, "images/" + formatPath);
     try {
+      // const metadata = { contentType: "image/jpeg" };
       await uploadBytes(fileRef, thumbnail);
     } catch (error) {
       return new Response(

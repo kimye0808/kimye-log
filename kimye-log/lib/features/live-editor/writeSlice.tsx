@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 interface WriteState {
   title: string;
   tags: string[];
+  thumbnail: File | null;
   contents: string;
   // lastLine: number;
   images: string[];
@@ -12,6 +13,7 @@ interface WriteState {
 const initialState: WriteState = {
   title: "",
   tags: [],
+  thumbnail: null,
   contents: "",
   // lastLine: 0,
   images: [],
@@ -27,6 +29,9 @@ const writeSlice = createSlice({
     },
     setReduxTags(state, action) {
       state.tags = action.payload;
+    },
+    setReduxThumbnail(state, action) {
+      state.thumbnail = action.payload;
     },
     setReduxContents(state, action) {
       state.contents = action.payload;
@@ -47,6 +52,7 @@ const writeSlice = createSlice({
 export const {
   setReduxTitle,
   setReduxTags,
+  setReduxThumbnail,
   setReduxContents,
   // setReduxLineNumber,
   setReduxImages,
