@@ -21,7 +21,6 @@ export default function Card({ postImg, tags, title, date }: PropsType) {
               width={300}
               height={100}
               className={`${classes} img-cover`}
-              priority
             />
           )}
         </figure>

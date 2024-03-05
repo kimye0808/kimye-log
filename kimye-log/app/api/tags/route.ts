@@ -26,7 +26,6 @@ export async function GET(request: NextRequest) {
       }
     );
   }
-  console.log("hi");
 
   try {
     // post 컬렉션에서 태그를 가져옴

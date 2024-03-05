@@ -3,7 +3,7 @@ import Link from "next/link";
 import CardDetail from "../card/card-detail";
 import classes from "./posts-list.module.css";
 import logoImg from "@/assets/logo.png";
-import { PostData } from "@/utils/post-utils";
+import { PostData } from "@/utils/format-file";
 import { useSearchParams } from "next/navigation";
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 import { useEffect } from "react";
@@ -54,8 +54,9 @@ export default function PostsListContent({ initialList }: Propstype) {
       // dispatch(fetchRecentPosts());
     }
   }, [dispatch, searchQuery, tagQuery]);
+  let postsList: PostData[] = [];
 
-  let postsList = Array.from(searchResult);
+  postsList = searchResult;
   if (!searchQuery && !tagQuery) {
     postsList = initialList;
   }
@@ -72,15 +73,15 @@ export default function PostsListContent({ initialList }: Propstype) {
           {postsList?.map((post) => {
             return (
               post && (
-                <Link key={post.slug} href={`/posts/${post.slug}`}>
+                <Link key={post._id} href={`/posts/${post.title}`}>
                   <li>
                     <CardDetail
-                      summary={post?.data?.summary}
-                      tags={post?.data?.tags}
-                      title={post?.data?.title}
+                      summary={post?.summary}
+                      tags={post?.tags}
+                      title={post?.title}
                       userImg={logoImg}
                       name={"kimye0808"}
-                      date={post?.data?.date}
+                      date={post?.date}
                     />
                   </li>
                 </Link>
