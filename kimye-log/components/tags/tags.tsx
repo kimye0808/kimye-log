@@ -1,12 +1,21 @@
 import classes from "./tags.module.css";
 import Tag from "./tag";
-import { getAllTags } from "@/utils/post-utils";
+import { TagData } from "@/utils/format-file";
 
 /**
  * home page에 보이는 태그들
  */
 export default async function Tags() {
-  const allTags = await getAllTags();
+  let allTags: TagData[];
+  try {
+    const response = await fetch(process.env.URL + "/api/tags");
+    if (!response.ok) {
+    }
+    const result = await response.json();
+    allTags = result.tags;
+  } catch (error) {
+    throw new Error("get recent-posts fail");
+  }
   return (
     <>
       <section className={classes.tags}>
@@ -19,7 +28,7 @@ export default async function Tags() {
           <ul className={`${classes["grid-list"]} grid-list`}>
             {allTags?.map((item) => (
               <li key={item.id}>
-                <Tag keyVal={item.tag} tagName={item.tag} />
+                <Tag keyVal={item.tag} tagName={item.tag} count={item.count} />
               </li>
             ))}
           </ul>

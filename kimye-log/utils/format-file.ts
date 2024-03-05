@@ -2,6 +2,7 @@ import { ref } from "firebase/storage";
 import { storage } from "@/firebase/firebase";
 import { getDownloadURL } from "firebase/storage";
 import { ObjectId } from "mongodb";
+import crypto from "crypto";
 
 export interface RawPostData {
   _id: ObjectId;
@@ -21,6 +22,12 @@ export interface PostData {
   contents: string;
   summary: string;
   date: string;
+}
+
+export interface TagData {
+  id: string;
+  tag: string;
+  count: number;
 }
 /**
  * 날짜 형식 'YYYY-MM-DD'로 변환하여 string 리턴
@@ -78,4 +85,20 @@ export async function formatPostData(data: RawPostData) {
   };
 
   return newData;
+}
+
+/**
+ *
+ * @param tagCounts post 컬렉션에서 추출한 태그+카운트 형태
+ * @returns 렌더용 태그 리턴
+ */
+export function formatTags(tagCounts: { [tag: string]: number }): any[] {
+  return Object.keys(tagCounts).map((tag) => {
+    const tagId = crypto.createHash("sha1").update(`${tag}`).digest("hex");
+    return {
+      id: tagId,
+      tag: tag,
+      count: tagCounts[tag],
+    };
+  });
 }
