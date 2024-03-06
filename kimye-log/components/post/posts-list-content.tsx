@@ -73,7 +73,7 @@ export default function PostsListContent({ initialList }: Propstype) {
           {postsList?.map((post) => {
             return (
               post && (
-                <Link key={post._id} href={`/posts/${post.title}`}>
+                <Link key={post._id} href={`/posts/${post.slug}`}>
                   <li>
                     <CardDetail
                       summary={post?.summary}

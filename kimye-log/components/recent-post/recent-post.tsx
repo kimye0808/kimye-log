@@ -10,7 +10,8 @@ export default async function RecentPost() {
   let postsData: PostData[];
   try {
     const response = await fetch(
-      process.env.URL + "/api/posts?page=1&limit=10"
+      process.env.URL + "/api/posts?page=1&limit=10",
+      { next: { tags: ["posts"] } }
     );
     if (!response.ok) {
     }

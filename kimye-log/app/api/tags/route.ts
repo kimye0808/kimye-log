@@ -9,7 +9,6 @@ import { formatTags } from "@/utils/format-file";
 export async function GET(request: NextRequest) {
   let client: MongoClient;
   let db: Db | Response;
-  console.log("hi");
 
   try {
     const connection = await connectToDatabase();

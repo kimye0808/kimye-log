@@ -8,7 +8,9 @@ import { TagData } from "@/utils/format-file";
 export default async function Tags() {
   let allTags: TagData[];
   try {
-    const response = await fetch(process.env.URL + "/api/tags");
+    const response = await fetch(process.env.URL + "/api/tags", {
+      next: { tags: ["tags"] },
+    });
     if (!response.ok) {
     }
     const result = await response.json();

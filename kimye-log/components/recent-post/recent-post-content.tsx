@@ -16,7 +16,7 @@ export default function RecentPostContent({ postsData }: Propstype) {
           return (
             post && (
               <li key={post._id}>
-                <Link href={`/posts/${post.title}`}>
+                <Link href={`/posts/${post.slug}`}>
                   <Card
                     postImg={post.thumbnail}
                     tags={post?.tags}

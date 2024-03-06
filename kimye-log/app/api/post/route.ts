@@ -1,5 +1,5 @@
 import { type NextRequest } from "next/server";
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { formatFilePath, isValidDateFormat } from "@/utils/format-file";
 import { storage } from "@/firebase/firebase";
@@ -7,12 +7,11 @@ import { ref, uploadBytes } from "firebase/storage";
 import { deleteImageFromStorage } from "@/utils/storage-util";
 import { connectToDatabase } from "@/utils/connect-db";
 import { Db, MongoClient } from "mongodb";
+import { revalidateTag } from "next/cache";
 /**
  *  /api/post
  */
 export async function POST(request: NextRequest) {
-  const formData = await request.formData();
-
   //not authenticated user 불가
   const session = await getServerSession(authOptions);
   if (!session || session.user?.name !== process.env.MONGODB_USERNAME) {
@@ -23,7 +22,8 @@ export async function POST(request: NextRequest) {
       },
     });
   }
-
+  const formData = await request.formData();
+  const slug = formData.get("slug");
   const title = formData.get("title");
   const tags = formData.get("tags");
   const contents = formData.get("contents");
@@ -32,6 +32,8 @@ export async function POST(request: NextRequest) {
   const date = formData.get("date");
 
   if (
+    !slug ||
+    String(slug).trim() === "" ||
     !title ||
     String(title).trim() === "" ||
     !contents ||
@@ -87,6 +89,7 @@ export async function POST(request: NextRequest) {
 
   //db에 저장할 data
   const newPost: any = {
+    slug,
     title,
     tags,
     thumbnail: formatPath,
@@ -110,10 +113,11 @@ export async function POST(request: NextRequest) {
   }
 
   client.close();
+  // revalidatePath("/", "layout");
+  revalidateTag("posts");
+  revalidateTag("tags");
 
-  /**
-   * 정상
-   */
+  //정상
   return new Response(JSON.stringify({ message: newPost }), {
     status: 201,
     headers: {
@@ -123,13 +127,15 @@ export async function POST(request: NextRequest) {
 }
 
 /**
- *  /api/post?slug=
+ *
+ * @param request /api/post?slug=포스트 슬러그
+ * @returns response(post)
  */
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
-  const title = searchParams.get("slug");
+  const slug = searchParams.get("slug");
 
-  if (!title) {
+  if (!slug) {
     return new Response(
       JSON.stringify({ message: "Title parameter is missing" }),
       {
@@ -161,7 +167,7 @@ export async function GET(request: NextRequest) {
 
   let post;
   try {
-    post = await db.collection("post").findOne({ title: title });
+    post = await db.collection("post").findOne({ slug: slug });
   } catch (error) {
     return new Response(JSON.stringify({ message: "Cannot find post" }), {
       status: 500,

@@ -6,6 +6,7 @@ import crypto from "crypto";
 
 export interface RawPostData {
   _id: ObjectId;
+  slug: string;
   title: string;
   tags: string;
   thumbnail: string;
@@ -16,6 +17,7 @@ export interface RawPostData {
 
 export interface PostData {
   _id: string;
+  slug: string;
   title: string;
   tags: string[];
   thumbnail: string;
@@ -76,6 +78,7 @@ export async function formatPostData(data: RawPostData) {
   }
   let newData: PostData = {
     _id: data._id.toString(),
+    slug: data.slug,
     title: data.title,
     tags: JSON.parse(data.tags),
     thumbnail: url,

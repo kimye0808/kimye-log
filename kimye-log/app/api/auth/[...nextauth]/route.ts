@@ -6,6 +6,7 @@ interface GitHubProviderType {
   clientSecret: string;
 }
 export const authOptions = {
+  // secret: process.env.SECRET,
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_ID ?? "",

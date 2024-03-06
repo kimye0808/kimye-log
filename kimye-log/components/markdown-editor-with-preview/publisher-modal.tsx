@@ -18,6 +18,8 @@ import {
   getImageUrlsFromMarkdowon,
   getMarkdownImagesFromContents,
 } from "@/utils/storage-util";
+import xss from "xss";
+import slugify from "slugify";
 /**
  *  Submit Buttons
  */
@@ -132,10 +134,14 @@ export default function PublisherModal() {
   async function handleSubmit(formData: FormData) {
     deleteUnusedImages();
     let date = formatDate(new Date());
+    formData.append(
+      "slug",
+      slugify(title, { lower: true, remove: /[*+~.()'"!:@]/g })
+    );
     formData.append("title", title);
     formData.append("tags", JSON.stringify(tags));
     formData.append("thumbnail", thumbnail || "");
-    formData.append("contents", contents);
+    formData.append("contents", xss(contents));
     formData.append("date", date);
 
     try {

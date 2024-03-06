@@ -14,7 +14,9 @@ interface TagType {
 export default async function SearchAndTags() {
   let allTags: TagData[];
   try {
-    const response = await fetch(process.env.URL + "/api/tags");
+    const response = await fetch(process.env.URL + "/api/tags", {
+      next: { tags: ["tags"] },
+    });
     if (!response.ok) {
     }
     const result = await response.json();

@@ -1,6 +1,6 @@
 import { type NextRequest } from "next/server";
-import { getAllPosts, getSearchResult } from "@/utils/post-utils";
-import { PostData } from "@/utils/post-utils";
+// import { getAllPosts, getSearchResult } from "@/utils/post-utils";
+// import { PostData } from "@/utils/post-utils";
 import { Db, MongoClient, WithId } from "mongodb";
 import { connectToDatabase } from "@/utils/connect-db";
 /**

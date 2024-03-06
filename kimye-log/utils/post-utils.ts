@@ -1,3 +1,8 @@
+/**
+ *
+ * local md 파일을 읽는 용도 - 2024-03-06 현재 사용하지 않음
+ *
+ */
 import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
