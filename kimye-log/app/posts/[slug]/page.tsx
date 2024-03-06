@@ -1,6 +1,7 @@
 import PostContent from "@/components/post/post-detail/post-content";
 import PostHeader from "@/components/post/post-detail/post-header";
-import { getPostData } from "@/utils/post-utils";
+import { formatPostData } from "@/utils/format-file";
+import { PostData } from "@/utils/format-file";
 
 interface PropsType {
   params: { slug: string };
@@ -8,21 +9,29 @@ interface PropsType {
 
 export default async function PostDetail({ params }: PropsType) {
   const slug = params.slug;
-  const postData = await getPostData(slug); //{ slug: postSlug, data: data, content: content };
+  let postData: PostData;
+  try {
+    const response = await fetch(process.env.URL + `/api/post?slug=${slug}`);
+    if (!response.ok) {
+    }
+    const result = await response.json();
+    postData = await formatPostData(result.post);
+  } catch (error) {
+    throw new Error("get recent-posts fail");
+  }
 
   return (
     <>
       <main>
         <article>
           <PostHeader
-            title={postData?.data?.title}
-            tags={postData?.data?.tags}
-            date={postData?.data?.date}
+            title={postData?.title}
+            tags={postData?.tags}
+            date={postData?.date}
           />
           <PostContent
-            slug={slug}
-            image={postData?.data?.image}
-            content={postData?.content}
+            image={postData?.thumbnail}
+            content={postData?.contents}
           />
         </article>
       </main>

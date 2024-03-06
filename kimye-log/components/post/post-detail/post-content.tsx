@@ -4,13 +4,13 @@ import customComponents from "@/components/common/custom-components";
 import classes from "./post-content.module.css";
 
 interface PostContetType {
-  slug: string;
+  // slug: string;
   image: string;
   content: string | undefined;
 }
 
-export default function PostContent({ slug, image, content }: PostContetType) {
-  const imagePath = `/images/posts/${slug}/${image}`;
+export default function PostContent({ image, content }: PostContetType) {
+  // const imagePath = `/images/posts/${slug}/${image}`;
 
   return (
     <>
@@ -19,8 +19,8 @@ export default function PostContent({ slug, image, content }: PostContetType) {
           {image && (
             <Image
               className={classes.image}
-              src={imagePath}
-              alt={`${slug} image`}
+              src={image}
+              alt={"post image"}
               width={300}
               height={300}
             />

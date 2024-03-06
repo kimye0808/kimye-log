@@ -121,3 +121,71 @@ export async function POST(request: NextRequest) {
     },
   });
 }
+
+/**
+ *  /api/post?slug=
+ */
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const title = searchParams.get("slug");
+
+  if (!title) {
+    return new Response(
+      JSON.stringify({ message: "Title parameter is missing" }),
+      {
+        status: 400,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
+
+  let client: MongoClient;
+  let db: Db | Response;
+  try {
+    const connection = await connectToDatabase();
+    client = connection.client;
+    db = connection.db;
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ message: "Cannot connect to database" }),
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
+
+  let post;
+  try {
+    post = await db.collection("post").findOne({ title: title });
+  } catch (error) {
+    return new Response(JSON.stringify({ message: "Cannot find post" }), {
+      status: 500,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  // 포스트를 찾지 못한 경우
+  if (!post) {
+    return new Response(JSON.stringify({ message: "Post not found" }), {
+      status: 404,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  // 포스트를 찾은 경우
+  return new Response(JSON.stringify({ post: post }), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}
