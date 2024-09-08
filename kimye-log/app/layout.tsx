@@ -1,9 +1,6 @@
-import "./globals.css";
 import type { Metadata } from "next";
+import "./globals.css";
 import MainHeader from "@/components/main-header/main-header";
-import ThemeProviders from "./ThemeProvider";
-import SessionProviders from "./SessionProvider";
-import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "Kimye0808's blog",
@@ -16,20 +13,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className="light"
-      style={{ colorScheme: "light" }}
-      data-color-mode="light"
-    >
+    <html lang="en">
       <body>
-        <SessionProviders>
-          <ThemeProviders>
-            <MainHeader />
-            {children}
-            <ToastContainer />
-          </ThemeProviders>
-        </SessionProviders>
+        <MainHeader />
+        {children}
       </body>
     </html>
   );

@@ -1,12 +1,8 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import headerSlice from "./features/header/headerSlice";
-import searchSllice from "./features/search/searchSllice";
-import writeSlice from "./features/live-editor/writeSlice";
 
 const rootReducer = combineReducers({
   header: headerSlice,
-  search: searchSllice,
-  write: writeSlice,
 });
 
 export const makeStore = () => {
