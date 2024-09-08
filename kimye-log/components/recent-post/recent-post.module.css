@@ -7,6 +7,9 @@
   flex-wrap: wrap;
   gap: 40px;
 }
+.recent-list li {
+  width: 100%;
+}
 
 .btn {
   margin-inline: auto;
@@ -19,17 +22,29 @@
 /**
 *  media queries
 */
-
+@media (min-width: 575px) {
+  .recent-list li {
+    padding-inline: 100px;
+  }
+}
+@media (min-width: 768px) {
+  .recent-list li {
+    padding-inline: 200px;
+  }
+}
 @media (min-width: 992px) {
   .recent-list {
     gap: 20px;
+  }
+  .recent-list li {
+    padding-inline: 0px;
   }
   .recent-list li:nth-child(-n + 2) {
     width: calc(50% - 15px);
   }
 
   .recent-list li:nth-child(n + 3) {
-    width: calc(33.33% - 20px);
+    width: calc(33.33% - 17px);
   }
 
   .-list li:nth-child(n + 3) .headline-3 {

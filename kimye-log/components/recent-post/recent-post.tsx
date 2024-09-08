@@ -2,17 +2,27 @@ import classes from "./recent-post.module.css";
 import Link from "next/link";
 import { getAllPosts } from "@/utils/post-utils";
 import RecentPostContent from "./recent-post-content";
-import { PostData } from "@/utils/post-utils";
+import { PostData, RawPostData, formatPostData } from "@/utils/format-file";
 /**
  * Home Page에서 뜨는 posts
  */
 export default async function RecentPost() {
   let postsData: PostData[];
   try {
-    postsData = await getAllPosts(); //  [ { slug: postSlug, data: data, content: content }, ...]
+    const response = await fetch(
+      process.env.URL + "/api/posts?page=1&limit=10",
+      { next: { tags: ["posts"] } }
+    );
+    if (!response.ok) {
+    }
+    const result = await response.json();
+    postsData = await Promise.all(
+      result?.posts.map((post: RawPostData) => formatPostData(post))
+    );
   } catch (error) {
     throw new Error("get recent-posts fail");
   }
+
   return (
     <>
       <section className={`${classes.recent} section `}>

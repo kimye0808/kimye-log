@@ -1,8 +1,8 @@
 import classes from "./recent-post.module.css";
 import Card from "../card/card";
 import logoImg from "@/assets/logo.png";
-import { PostData } from "@/utils/post-utils";
 import Link from "next/link";
+import { PostData } from "@/utils/format-file";
 
 interface Propstype {
   postsData: PostData[];
@@ -15,17 +15,13 @@ export default function RecentPostContent({ postsData }: Propstype) {
         {postsData.map((post) => {
           return (
             post && (
-              <li key={post.slug}>
+              <li key={post._id}>
                 <Link href={`/posts/${post.slug}`}>
                   <Card
-                    slug={post!.slug}
-                    postImg={`/images/posts/${post?.slug}/${post?.data?.image}`}
-                    tags={post?.data?.tags}
-                    readingTime={3}
-                    title={post?.data?.title}
-                    userImg={logoImg}
-                    name={"kimye0808"}
-                    date={post?.data?.date}
+                    postImg={post.thumbnail}
+                    tags={post?.tags}
+                    title={post?.title}
+                    date={post?.date}
                   />
                 </Link>
               </li>

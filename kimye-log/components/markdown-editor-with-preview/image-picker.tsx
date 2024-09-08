@@ -2,6 +2,8 @@
 import classes from "./image-picker.module.css";
 import React, { useRef, useState } from "react";
 import Image from "next/image";
+import { setReduxThumbnail } from "@/lib/features/live-editor/writeSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 
 export default function ImagePicker({
   pickedImage,
@@ -10,6 +12,7 @@ export default function ImagePicker({
   pickedImage: string | null;
   handleImage: (item: string | null) => void;
 }) {
+  const dispatch = useAppDispatch();
   const imageInputRef = useRef<HTMLInputElement>(null);
 
   function handlePickClick() {
@@ -23,11 +26,13 @@ export default function ImagePicker({
 
     if (!file) {
       handleImage(null);
+      dispatch(setReduxThumbnail(null));
       return;
     }
     const fileReader = new FileReader();
     fileReader.onload = () => {
       handleImage(fileReader.result as string);
+      dispatch(setReduxThumbnail(file));
     };
     fileReader.readAsDataURL(file);
   }
@@ -54,7 +59,6 @@ export default function ImagePicker({
         type="file"
         id={"thumbnail"}
         accept="image/png, image/jpeg"
-        name={"thumbnail"}
         ref={imageInputRef}
         onChange={handleImageChange}
       />

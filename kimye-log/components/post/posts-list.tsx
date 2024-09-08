@@ -1,15 +1,24 @@
 import StoreProvider from "@/app/StoreProvider";
 import classes from "./posts-list.module.css";
 import PostsListContent from "./posts-list-content";
-import { getAllPosts } from "@/utils/post-utils";
-import { PostData } from "@/utils/post-utils";
+import { PostData } from "@/utils/format-file";
+import { RawPostData, formatPostData } from "@/utils/format-file";
 
 export default async function PostsList() {
   let initialList: PostData[];
   try {
-    initialList = await getAllPosts(); //  [ { slug: postSlug, data: data, content: content }, ...]
+    const response = await fetch(
+      process.env.URL + "/api/posts?page=1&limit=10",
+      { next: { tags: ["posts"] } }
+    );
+    if (!response.ok) {
+    }
+    const result = await response.json();
+    initialList = await Promise.all(
+      result?.posts.map((post: RawPostData) => formatPostData(post))
+    );
   } catch (error) {
-    throw new Error("get posts-list fail");
+    throw new Error("get recent-posts fail");
   }
   return (
     <>

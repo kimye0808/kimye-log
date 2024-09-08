@@ -1,17 +1,17 @@
 import { type NextRequest } from "next/server";
-import { MongoClient } from "mongodb";
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { formatFilePath, isValidDateFormat } from "@/utils/format-file";
 import { storage } from "@/firebase/firebase";
 import { ref, uploadBytes } from "firebase/storage";
 import { deleteImageFromStorage } from "@/utils/storage-util";
+import { connectToDatabase } from "@/utils/connect-db";
+import { Db, MongoClient } from "mongodb";
+import { revalidateTag } from "next/cache";
 /**
  *  /api/post
  */
 export async function POST(request: NextRequest) {
-  const formData = await request.formData();
-
   //not authenticated user 불가
   const session = await getServerSession(authOptions);
   if (!session || session.user?.name !== process.env.MONGODB_USERNAME) {
@@ -22,7 +22,8 @@ export async function POST(request: NextRequest) {
       },
     });
   }
-
+  const formData = await request.formData();
+  const slug = formData.get("slug");
   const title = formData.get("title");
   const tags = formData.get("tags");
   const contents = formData.get("contents");
@@ -31,6 +32,8 @@ export async function POST(request: NextRequest) {
   const date = formData.get("date");
 
   if (
+    !slug ||
+    String(slug).trim() === "" ||
     !title ||
     String(title).trim() === "" ||
     !contents ||
@@ -45,11 +48,12 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  //db에 connect
   let client: MongoClient;
-  const connectionString = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_CLUSTERNAME}.7z6drok.mongodb.net/`;
+  let db: Db | Response;
   try {
-    client = await MongoClient.connect(connectionString);
+    const connection = await connectToDatabase();
+    client = connection.client;
+    db = connection.db;
   } catch (error) {
     return new Response(
       JSON.stringify({ message: "Cannot connect to database" }),
@@ -61,14 +65,14 @@ export async function POST(request: NextRequest) {
       }
     );
   }
-  const db = client.db();
 
   // 썸네일을 올린다
   let formatPath: string = "";
-  if (thumbnail instanceof File) {
+  if (thumbnail !== "" && thumbnail instanceof File) {
     formatPath = formatFilePath(thumbnail?.name);
     const fileRef = ref(storage, "images/" + formatPath);
     try {
+      // const metadata = { contentType: "image/jpeg" };
       await uploadBytes(fileRef, thumbnail);
     } catch (error) {
       return new Response(
@@ -85,6 +89,7 @@ export async function POST(request: NextRequest) {
 
   //db에 저장할 data
   const newPost: any = {
+    slug,
     title,
     tags,
     thumbnail: formatPath,
@@ -108,12 +113,83 @@ export async function POST(request: NextRequest) {
   }
 
   client.close();
+  // revalidatePath("/", "layout");
+  revalidateTag("posts");
+  revalidateTag("tags");
 
-  /**
-   * 정상
-   */
+  //정상
   return new Response(JSON.stringify({ message: newPost }), {
     status: 201,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}
+
+/**
+ *
+ * @param request /api/post?slug=포스트 슬러그
+ * @returns response(post)
+ */
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const slug = searchParams.get("slug");
+
+  if (!slug) {
+    return new Response(
+      JSON.stringify({ message: "Title parameter is missing" }),
+      {
+        status: 400,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
+
+  let client: MongoClient;
+  let db: Db | Response;
+  try {
+    const connection = await connectToDatabase();
+    client = connection.client;
+    db = connection.db;
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ message: "Cannot connect to database" }),
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
+
+  let post;
+  try {
+    post = await db.collection("post").findOne({ slug: slug });
+  } catch (error) {
+    return new Response(JSON.stringify({ message: "Cannot find post" }), {
+      status: 500,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  // 포스트를 찾지 못한 경우
+  if (!post) {
+    return new Response(JSON.stringify({ message: "Post not found" }), {
+      status: 404,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  // 포스트를 찾은 경우
+  return new Response(JSON.stringify({ post: post }), {
+    status: 200,
     headers: {
       "Content-Type": "application/json",
     },

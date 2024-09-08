@@ -1,3 +1,36 @@
+import { ref } from "firebase/storage";
+import { storage } from "@/firebase/firebase";
+import { getDownloadURL } from "firebase/storage";
+import { ObjectId } from "mongodb";
+import crypto from "crypto";
+
+export interface RawPostData {
+  _id: ObjectId;
+  slug: string;
+  title: string;
+  tags: string;
+  thumbnail: string;
+  contents: string;
+  summary: string;
+  date: string;
+}
+
+export interface PostData {
+  _id: string;
+  slug: string;
+  title: string;
+  tags: string[];
+  thumbnail: string;
+  contents: string;
+  summary: string;
+  date: string;
+}
+
+export interface TagData {
+  id: string;
+  tag: string;
+  count: number;
+}
 /**
  * 날짜 형식 'YYYY-MM-DD'로 변환하여 string 리턴
  */
@@ -30,4 +63,45 @@ export function formatFilePath(fileName: string): string {
   const seconds = currentDate.getSeconds().toString().padStart(2, "0");
   const formattedFileName = `${year}/${month}/${day}/${hours}${minutes}${seconds}_img_${fileName}`;
   return formattedFileName;
+}
+
+/**
+ *
+ * @param data db에서 가져온 raw Post data
+ * @returns render하기 쉽게 format 변환된 Post data
+ */
+export async function formatPostData(data: RawPostData) {
+  let url: string = "";
+  if (data?.thumbnail !== "") {
+    const fileRef = ref(storage, "images/" + data.thumbnail);
+    url = await getDownloadURL(fileRef);
+  }
+  let newData: PostData = {
+    _id: data._id.toString(),
+    slug: data.slug,
+    title: data.title,
+    tags: JSON.parse(data.tags),
+    thumbnail: url,
+    contents: data.contents,
+    summary: data.summary,
+    date: data.date,
+  };
+
+  return newData;
+}
+
+/**
+ *
+ * @param tagCounts post 컬렉션에서 추출한 태그+카운트 형태
+ * @returns 렌더용 태그 리턴
+ */
+export function formatTags(tagCounts: { [tag: string]: number }): any[] {
+  return Object.keys(tagCounts).map((tag) => {
+    const tagId = crypto.createHash("sha1").update(`${tag}`).digest("hex");
+    return {
+      id: tagId,
+      tag: tag,
+      count: tagCounts[tag],
+    };
+  });
 }
