@@ -1,0 +1,17 @@
+.btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 60px;
+}
+
+/**
+*  media queries
+*/
+
+@media (min-width: 768px) {
+  .btn {
+    right: 16px;
+    z-index: 4;
+  }
+}

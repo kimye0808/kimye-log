@@ -1,0 +1,73 @@
+.section {
+  padding-block: calc(var(--section-padding) - 50px);
+  padding-block-start: calc(var(--section-padding) + 50px);
+  background-color: var(--bg-frost-white);
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+}
+.container {
+  padding-inline: 16px;
+  padding-block-end: 2rem;
+}
+
+.search-bar {
+  position: relative;
+  border: 2px solid var(--border-gray);
+  border-radius: var(--radius-8);
+  padding: 20px;
+}
+
+.search-bar .icon {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+.search-bar input {
+  position: absolute;
+  top: 1rem;
+  left: 3.2rem;
+}
+
+.search-bar input::placeholder {
+  color: var(--text-gray);
+}
+
+.tags-wrapper {
+  overflow-x: auto; /* 가로 방향 스크롤 표시 설정 */
+  max-height: 100%; /* 최대 높이 지정 */
+  font-size: var(--fontSize-9);
+}
+
+/**
+*  media queries
+*/
+@media (min-width: 575px) {
+  .section {
+    margin-inline: 50px;
+  }
+  .search-bar input {
+    top: 0.6rem;
+  }
+}
+@media (min-width: 768px) {
+  .section {
+    margin-inline: 100px;
+  }
+}
+@media (min-width: 992px) {
+  .section {
+    margin-inline: 250px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .section {
+    margin-inline: 350px;
+  }
+}
+@media (min-width: 1500px) {
+  .section {
+    margin-inline: 450px;
+  }
+}

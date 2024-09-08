@@ -1,0 +1,81 @@
+.section {
+  padding-block: calc(var(--section-padding) - 60px);
+  padding-block-start: calc(var(--section-padding) + 30px);
+  background-color: var(--bg-frost-white);
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+}
+.container {
+  padding-inline: 16px;
+}
+.headline {
+  padding-block-end: 15px;
+}
+
+.tags-wrapper {
+  overflow-x: auto; /* 가로 방향 스크롤 표시 설정 */
+  max-height: 100%; /* 최대 높이 지정 */
+  font-size: var(--fontSize-9);
+}
+
+.name {
+  display: inline-block;
+
+  font-size: var(--fontSize-8);
+  color: var(--text-deep-forest-green);
+  margin-right: 10px;
+  margin-block-end: 5px;
+}
+.date {
+  display: inline;
+  font-size: var(--fontSize-9);
+  color: var(--text-gray);
+}
+
+.loading {
+  background-color: var(--bg-light-gray);
+  border-radius: var(--radius-6);
+}
+
+.width100 {
+  display: inline-block;
+  width: 100px;
+}
+.width100b {
+  width: 100px;
+}
+
+.width85 {
+  width: 85%;
+}
+
+.width70 {
+  width: 70%;
+}
+
+@media (min-width: 575px) {
+  .section {
+    margin-inline: 50px;
+  }
+}
+@media (min-width: 768px) {
+  .section {
+    margin-inline: 100px;
+  }
+}
+@media (min-width: 992px) {
+  .section {
+    margin-inline: 250px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .section {
+    margin-inline: 350px;
+  }
+}
+@media (min-width: 1500px) {
+  .section {
+    margin-inline: 450px;
+  }
+}

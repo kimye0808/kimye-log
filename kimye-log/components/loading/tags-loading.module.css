@@ -1,0 +1,5 @@
+.tags-wrapper {
+  overflow-x: auto; /* 가로 방향 스크롤 표시 설정 */
+  max-height: 100%; /* 최대 높이 지정 */
+  font-size: var(--fontSize-9);
+}

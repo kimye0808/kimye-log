@@ -1,0 +1,44 @@
+.loading-wrapper {
+  width: 100%;
+  position: relative;
+}
+.loading {
+  border: none;
+  background: var(--bg-light-gray);
+  margin-block-end: 3px;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-wrapper {
+  margin-block-start: 12px;
+}
+
+.wrapper,
+.card-tag {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.image {
+  height: 17rem;
+}
+
+.width100b {
+  width: 100px;
+}
+
+.width100 {
+  width: 100%;
+}
+
+.width70 {
+  width: 70%;
+}
+
+.end {
+  margin-block-end: 3px;
+}

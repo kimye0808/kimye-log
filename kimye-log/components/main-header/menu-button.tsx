@@ -1,7 +1,8 @@
 "use client";
 import { useAppDispatch } from "@/lib/hooks";
 import { toggle } from "@/lib/features/header/headerSlice";
-import { TfiMenu } from "react-icons/tfi";
+import { HiMenu } from "@react-icons/all-files/hi/HiMenu";
+import classes from "./nav-bar.module.css";
 
 export default function MenuButton() {
   //store에서 navbar 보여질지 말지 정보 받기
@@ -15,8 +16,8 @@ export default function MenuButton() {
 
   return (
     <>
-      <button onClick={toggleVisible}>
-        <TfiMenu size="3rem" />
+      <button onClick={toggleVisible} className={classes["menu-btn"]}>
+        <HiMenu size="3rem" />
       </button>
     </>
   );

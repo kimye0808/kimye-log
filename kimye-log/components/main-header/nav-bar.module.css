@@ -1,11 +1,15 @@
+.menu-btn {
+  visibility: visible;
+}
 .navbar {
   position: absolute;
   top: 0;
   right: -340px;
-  max-width: 340px;
+  max-width: 800px;
   width: 100%;
   height: 100vh;
-  background-color: var(--bg-emerald-green);
+  background-color: var(--bg-frost-white);
+  color: var(--text-deep-forest-green);
   padding: 30px;
   z-index: 2;
   overflow-y: auto;
@@ -13,7 +17,7 @@
   transition: 0.25s var(--cubic-in);
 }
 
-.navbar.active {
+.active {
   transform: translateX(-340px);
   visibility: visible;
   transition: 0.5s var(--cubic-out);
@@ -25,21 +29,81 @@
   align-items: center;
   padding-block-end: 15px;
   margin-block-end: 15px;
-  border-block-end: 1px solid var(--border-white);
+  border-block-end: 1px solid var(--border-black);
 }
 
 .navbar-list {
   padding-block-end: 15px;
-  border-block-end: 1px solid var(--border-white);
+  border-block-end: 1px solid var(--border-black);
 }
 
 .navbar-link {
-  color: var(--text-light-green);
   font-weight: var(--weight-medium);
-  padding-block: 10px;
+  height: 60px;
 }
 
 .copyright-text {
-  color: var(--text-light-green);
+  color: black;
   font-size: var(--fontSize-8);
+}
+
+/**
+*   media queries
+*/
+@media (min-width: 768px) {
+  .menu-btn {
+    visibility: hidden;
+  }
+  .navbar {
+    position: absolute;
+    visibility: visible;
+    top: 0;
+    left: 40%;
+    width: 600px;
+    height: 100%;
+    padding: 0;
+    transform: none;
+    transition: none;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .active {
+    transform: none;
+    transition: none;
+  }
+  .navbar-top {
+    display: none;
+    visibility: hidden;
+  }
+  .navbar-top {
+    padding-block-end: 0;
+    margin-block-end: 0;
+  }
+  .navbar-list {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-block-end: 0;
+    gap: 50px;
+    border-block-end: 0;
+  }
+  .copyright-text {
+    visibility: hidden;
+  }
+}
+@media (min-width: 1200px) {
+  .navbar {
+    margin-inline: auto;
+  }
+}
+@media (min-width: 1500px) {
+  .navbar {
+    width: 800px;
+    right: 350px;
+  }
 }
