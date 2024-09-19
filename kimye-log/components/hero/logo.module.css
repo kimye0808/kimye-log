@@ -1,9 +1,15 @@
-.logo {
+.container {
+  position: relative;
   display: block;
   max-width: max-content;
   margin-inline: auto;
-  margin: auto;
   width: auto;
+  height: auto;
+}
+
+.logo {
+  display: block;
+  max-width: 100%;
   height: auto;
   transition: opacity 0.5s ease-in-out;
 }
@@ -11,8 +17,31 @@
 .shape {
   position: absolute;
   z-index: 1;
+  will-change: transform;
+}
 
+.shape1 {
+  top: 50px;
+  right: 40px;
   animation: heroDecoAnim1 3s linear infinite alternate;
+}
+
+.shape2 {
+  bottom: 40px;
+  left: 24px;
+  animation: heroDecoAnim3 3s linear infinite alternate;
+}
+
+.shape3 {
+  top: 50px;
+  left: 4px;
+  animation: heroDecoAnim2 3s linear infinite alternate;
+}
+
+.shape4 {
+  bottom: 80px;
+  right: 30px;
+  animation: heroDecoAnim3 4s linear infinite alternate;
 }
 
 @keyframes heroDecoAnim1 {
@@ -41,82 +70,24 @@
     transform: translateX(-20px) rotate(2turn);
   }
 }
-.shape-1 {
-  top: 50px;
-  right: 40px;
-}
 
-.shape-2 {
-  bottom: 40px;
-  left: 24px;
-  animation: heroDecoAnim3 3s linear infinite alternate;
-}
-
-.shape-3 {
-  top: 50px;
-  left: 4px;
-  animation: heroDecoAnim2 3s linear infinite alternate;
-}
-
-.shape-4 {
-  bottom: 80px;
-  right: 30px;
-  animation: heroDecoAnim3 4s linear infinite alternate;
-}
-
-/**
-*  media queries
-*/
 @media (min-width: 575px) {
-  .shape-1 {
-    right: 150px;
-  }
-
-  .shape-2 {
-    left: 100px;
-  }
-
-  .shape-3 {
-    left: 100px;
-  }
-
-  .shape-4 {
-    right: 100px;
-  }
+  .shape1 { right: 150px; }
+  .shape2 { left: 100px; }
+  .shape3 { left: 100px; }
+  .shape4 { right: 100px; }
 }
 
 @media (min-width: 992px) {
-  .shape-1 {
-    right: 350px;
-  }
-
-  .shape-2 {
-    left: 300px;
-  }
-
-  .shape-3 {
-    left: 300px;
-  }
-
-  .shape-4 {
-    right: 300px;
-  }
+  .shape1 { right: 350px; }
+  .shape2 { left: 300px; }
+  .shape3 { left: 300px; }
+  .shape4 { right: 300px; }
 }
 
 @media (min-width: 1200px) {
-  .shape-1 {
-    right: 550px;
-  }
-
-  .shape-2 {
-    left: 500px;
-  }
-
-  .shape-3 {
-    left: 500px;
-  }
-
-  .shape-4 {
-    right: 500px;
-  }
+  .shape1 { right: 550px; }
+  .shape2 { left: 500px; }
+  .shape3 { left: 500px; }
+  .shape4 { right: 500px; }
 }

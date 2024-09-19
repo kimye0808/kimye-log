@@ -6,7 +6,11 @@ import SessionProviders from "./SessionProvider";
 import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
-  title: "Kimye0808's blog",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000"),
+  title: {
+    default: "Kimye0808's blog",
+    template: '%s | Kimye0808\'s blog',
+  },
   description: "Software Engineer Kimye0808's Development Blog",
 };
 
