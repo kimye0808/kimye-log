@@ -3,7 +3,7 @@ import { Commands } from "@uiw/react-markdown-editor/cjs/components/ToolBar";
 import { EditorSelection } from "@codemirror/state";
 import { useRef, useState } from "react";
 import { storage } from "@/firebase/firebase";
-import { ref, uploadString, getDownloadURL } from "firebase/storage";
+import { ref, uploadString, getDownloadURL, uploadBytes } from "firebase/storage";
 import { formatFilePath } from "@/utils/format-file";
 import { EditorView } from "@codemirror/view";
 import { EditorState } from "@uiw/react-codemirror";
@@ -102,13 +102,13 @@ export function ToolbarFeatures() {
   /**
    *  firebase storage에 파일을 저장하고 url을 받고 에디터 및 리덕스에 반영한다
    */
-  async function submitToStorage(pickedImage: string, fileName: string) {
+  async function submitToStorage(file: File, fileName: string) {
     // 파일명을 포함한 전체 경로 생성
     const formatPath = formatFilePath(fileName);
     const fileRef = ref(storage, "images/" + formatPath);
     let url: string = "";
     try {
-      await uploadString(fileRef, pickedImage, "data_url");
+      await uploadBytes(fileRef, file); // uploadString 대신 uploadBytes 사용
       url = await getDownloadURL(fileRef);
     } catch (error) {
       toastError();
@@ -148,7 +148,7 @@ export function ToolbarFeatures() {
       if (pickedImage) {
         try {
           const fileName = file.name;
-          await submitToStorage(pickedImage, fileName);
+          await submitToStorage(file, fileName);
         } catch (error) {
           toastError();
           console.error(error);

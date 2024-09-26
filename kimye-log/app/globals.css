@@ -15,6 +15,7 @@
   --bg-pearl-gray: #f8f9fa;
   --bg-minty-blue: #e9ecef;
   --bg-white-alpha: rgba(245, 245, 245, 0.8);
+  --bg-tag: #f0f0f0;
   --bg-yellow-green: #9bcf53;
 
   /** Text colors */
@@ -102,6 +103,7 @@
   --bg-pearl-gray: black;
   --bg-minty-blue: black;
   --bg-white-alpha: rgba(0, 0, 0, 0.8);
+  --bg-tag: #212121;
 
   /** Text colors */
   --text-black: white;
