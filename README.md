@@ -3,8 +3,8 @@ kimye-log is a fullstack blog project crafted with TypeScript, Next.js, and Reac
 
 ---
 
-<img src="./sample/pc.gif" width="830" height="510"/>
-<img src="./sample/tablet.gif" width="620" height="620"/>
+<img src="./sample/pc.gif" width="100%" height="60%"/>
+<img src="./sample/tablet.gif" width="60%" height="60%"/>
 <img src="./sample/mobile.gif" width="200" height="400"/>
 
 
